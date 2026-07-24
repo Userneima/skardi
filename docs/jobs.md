@@ -12,8 +12,9 @@ polled by run id (the write path agents use to commit durable results).
 somewhere you can query again later.
 
 
-[docs/agent_data_plane.md § Trust the agent, but make writes safe](agent_data_plane.md#4-trust-the-agent-but-make-writes-safe)
-for the design rationale.
+See [Context boundaries for agents](agent_data_plane.md) for the current
+agent-access boundary. The jobs ledger records job lifecycle only; it is
+not a complete audit trail for all Skardi actions.
 
 ---
 

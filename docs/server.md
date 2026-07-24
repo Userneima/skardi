@@ -120,6 +120,21 @@ Request / response bodies for pipeline execution are documented in
 submission and the run lifecycle are documented in
 [jobs.md § HTTP endpoints](jobs.md#http-endpoints).
 
+## Agent access boundary
+
+`skardi-server` exposes named, declared pipelines at `POST
+/:name/execute`; it does not expose a general `/query` SQL endpoint. The
+CLI can run direct SQL against a local context, which is a separate
+development and exploration path.
+
+Source access mode is part of the context configuration: sources are
+read-only by default, and DML needs an explicit `read_write` setting. DDL
+in a pipeline is rejected when pipeline configuration is loaded. These
+controls do not currently provide per-agent or per-user grants,
+system-wide row or column policies, complete audit trails, rollback, or
+data lineage. MCP bindings and Cloud-hosted coordination are not current
+server interfaces.
+
 ---
 
 ## Context files
@@ -239,4 +254,4 @@ on that source, from pipelines and jobs alike.
 - **[Jobs](jobs.md)** — YAML shape, destinations, run ledger, and cancellation for the offline-batch side.
 - **[Semantics](semantics.md)** — natural-language descriptions on tables and columns; the agent-facing catalog overlay.
 - **[CLI](cli.md)** — `skardi run`, aliases, federated SQL from the shell.
-- **[Why an agent data plane](agent_data_plane.md)** — why the data plane is shaped this way.
+- **[Context boundaries for agents](agent_data_plane.md)** — what an agent can and cannot access through Skardi today.

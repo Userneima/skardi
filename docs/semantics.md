@@ -30,6 +30,19 @@ A separate `kind: semantics` resource is the answer: same envelope as
 context / pipelines / jobs, hot-pluggable at startup, freely composable
 across multiple files.
 
+## Ownership and review
+
+Semantics are a developer- or data-owner-reviewed business contract. They
+explain what a table, column, and metric mean; they are not automatically
+discovered facts. An agent can help draft descriptions, but a person who
+understands the source should review them before they guide production
+queries.
+
+The descriptions are returned to agent clients, so keep credentials,
+personal data, and internal-only operational detail out of this file.
+Semantics improve an agent's context; they do not create access control or
+replace the underlying database's permissions.
+
 ---
 
 ## File shape

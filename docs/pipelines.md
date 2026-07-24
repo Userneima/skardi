@@ -2,21 +2,21 @@
 
 Pipelines are Skardi's **online-serving** primitive: a parameterized SQL
 query declared in YAML, exposed synchronously as a REST endpoint and
-runnable from the CLI. They're the read path every agent tool call hits —
+runnable from the CLI. They are a declared shared-task interface, not a
+general SQL endpoint and not a per-agent authorization system. They are
 the low-latency peer of [offline jobs](jobs.md), which use the same SQL
 shape for durable async writes.
 
 **In one sentence:** a pipeline answers a query; a job commits the answer
 somewhere you can query again later.
 
-One pipeline YAML drives every agent-facing surface:
+One pipeline YAML drives the current interfaces:
 
 - **REST** — `POST /<name>/execute` against `skardi-server` today.
 - **Shell** — `skardi run <name> --param=…` from the CLI today.
-- **Claude skills** — auto-generated Markdown under `.claude/skills/` (v1.1
-  roadmap).
-- **MCP tools** — same YAML projected to MCP for non-Claude hosts (v1.1
-  roadmap).
+
+Skills generation and MCP bindings are roadmap ideas, not supported
+interfaces in the current release.
 
 This page covers the pipeline YAML shape, parameter inference, invocation,
 and response format. For the HTTP binding and shared concerns (context
@@ -55,6 +55,17 @@ The loader is strict — a file without `kind: pipeline` at the root is
 rejected at startup, and a pipeline file under a `--jobs` directory is
 silently skipped.
 
+### Start read-only
+
+Use `SELECT` pipelines for agent-facing tasks unless there is a reviewed
+reason to change data. A source is read-only by default; DML requires an
+explicit `access_mode: read_write` setting in the context file. The server
+also rejects DDL in a pipeline when it loads the configuration.
+
+This is an access boundary for configured sources, not a full governance
+system: Skardi does not currently provide per-agent or per-user grants,
+row- or column-level policy, a complete audit trail, or rollback.
+
 ### Parameter placeholders
 
 Parameters are `{name}` tokens in the SQL. The loader extracts the set of
@@ -79,6 +90,13 @@ The supported JSON value → SQL literal mapping is:
 | `null` | `NULL` | `WHERE {brand} IS NULL OR brand = {brand}` |
 | `[1, 2, 3]` (array of scalars) | `[1, 2, 3]` | pgvector / SeekDB VECTOR literal |
 | `[[…], […]]` (array of arrays) | `(c1, c2, …), (c1, c2, …)` | `INSERT … VALUES {rows}` |
+
+### Write examples require explicit opt-in
+
+The examples below include `INSERT` to document the renderer's supported
+shapes. Do not copy them into a default context: they run only when the
+relevant source has explicitly been configured with `access_mode:
+read_write`. They do not create complete auditing, rollback, or lineage.
 
 The array-of-arrays shape lets one parameter carry a multi-row VALUES
 clause whose batch size is set by the caller, not baked into the YAML:
