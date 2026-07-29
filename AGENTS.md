@@ -119,6 +119,7 @@ Pipelines are YAML files parsed into `StandardPipeline`. Parameter types and res
 - Link the issue or describe the user-visible behavior change in the PR description.
 - Don't commit secrets, `.env` files, or large binary blobs. Sample data goes under [data/](data/); large or generated test data should not be committed at all.
 - Don't bypass pre-commit hooks. If `cargo check` fails on commit, fix the underlying error.
+- Default for this repository: once an in-scope task is validated, commit and push it to the active branch's configured fork remote. Before pushing, verify the target branch and remote, exclude unrelated local changes, and never force-push unless the user explicitly asks.
 
 ## Things That Will Get a PR Rejected
 
