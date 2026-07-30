@@ -5,22 +5,13 @@
   <img src="asset/controlled-db-debugging-hero-zh-CN.svg" alt="Skardi 流程图：已连接的数据源和上下文定义经治理后，成为编程 Agent 可安全使用的只读上下文。" width="100%">
 </picture>
 
-<table align="center">
-  <tr>
-    <td valign="middle"><strong>给 Skardi 点星 ❤️ →</strong></td>
-    <td valign="middle"><a href="https://github.com/SkardiLabs/skardi" title="在 GitHub 上 Star Skardi"><img src="asset/skardi-star.gif" alt="高亮 Skardi GitHub Star 按钮的动图" width="380" height="110"></a></td>
-  </tr>
-</table>
-
-<table align="center">
-  <tr>
-    <td><a href="https://www.skardi.ai/" title="访问 skardi.ai"><img src="asset/readme-website-button.svg" alt="访问 skardi.ai" width="127" height="48"></a></td>
-    <td>&nbsp;·&nbsp;</td>
-    <td><a href="https://skardilabs.github.io/skardi-docs/" title="阅读 Skardi 文档"><img src="asset/readme-docs-button.svg" alt="阅读 Skardi 文档" width="89" height="48"></a></td>
-    <td>&nbsp;·&nbsp;</td>
-    <td><a href="https://discord.gg/S5YQQPEV2m" title="加入 Skardi Discord 社区"><img src="asset/readme-discord-button.svg" alt="加入 Skardi Discord 社区" width="115" height="48"></a></td>
-  </tr>
-</table>
+<p align="center">
+  <strong>给 Skardi 点星 ❤️ →</strong>&nbsp;
+  <a href="https://github.com/SkardiLabs/skardi" title="在 GitHub 上 Star Skardi"><img src="asset/skardi-star-compact.gif" alt="高亮 Skardi GitHub Star 按钮的动图" width="150" height="60" align="absmiddle"></a>&nbsp;·&nbsp;
+  <a href="https://www.skardi.ai/" title="访问 skardi.ai"><img src="asset/readme-website-button.svg" alt="访问 skardi.ai" width="127" height="48" align="absmiddle"></a>&nbsp;·&nbsp;
+  <a href="https://skardilabs.github.io/skardi-docs/" title="阅读 Skardi 文档"><img src="asset/readme-docs-button.svg" alt="阅读 Skardi 文档" width="89" height="48" align="absmiddle"></a>&nbsp;·&nbsp;
+  <a href="https://discord.gg/S5YQQPEV2m" title="加入 Skardi Discord 社区"><img src="asset/readme-discord-button.svg" alt="加入 Skardi Discord 社区" width="115" height="48" align="absmiddle"></a>
+</p>
 
 # 让编程 Agent 安全地获得正确的数据。
 
