@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1440" height="470" viewBox="0 0 1440 470" role="img" aria-labelledby="t d">
-<title id="t">Skardi controlled database debugging</title>
-<desc id="d">Reviewed input and semantic definitions flow through Skardi, which governs access, to a coding agent that gets a read-only diagnosis while unsafe write and DDL operations are blocked.</desc>
+<title id="t">Skardi governed context for coding agents</title>
+<desc id="d">Connected sources and context definitions flow through Skardi to give a coding agent governed, read-only data context and approved access.</desc>
 <defs>
 <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#ffffff"/><stop offset="1" stop-color="#f4fbf8"/></linearGradient>
 <linearGradient id="skardi" x1="0" x2="1"><stop stop-color="#2ec47a"/><stop offset="1" stop-color="#1a8fe0"/></linearGradient>
@@ -50,15 +50,15 @@
 <path d="M972 140h406" stroke="#1a8fe0" stroke-opacity=".28"/>
 <g transform="translate(998 97) scale(0.95)" fill="none" stroke="#1a8fe0" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></g>
 <text x="1036" y="119" fill="#172b3a" font-size="23" font-weight="700">Coding agent</text>
-<text x="1000" y="180" fill="#607486" font-size="14" font-weight="700" letter-spacing="1">DIAGNOSIS</text>
-<text x="1000" y="212" fill="#172b3a" font-size="24" font-weight="700">Acme Robotics failed after 3DS.</text>
-<text x="1000" y="262" fill="#607486" font-size="14" font-weight="700" letter-spacing="1">SAFETY CHECK</text>
-<rect x="1000" y="278" width="160" height="36" rx="8" fill="#fff4f4" stroke="#dd6b6b" stroke-opacity=".6"/>
-<text x="1080" y="302" text-anchor="middle" fill="#b64545" font-size="16" font-family="JetBrains Mono, monospace">UPDATE blocked</text>
-<rect x="1174" y="278" width="196" height="36" rx="8" fill="#fff4f4" stroke="#dd6b6b" stroke-opacity=".6"/>
-<text x="1272" y="302" text-anchor="middle" fill="#b64545" font-size="16" font-family="JetBrains Mono, monospace">DROP TABLE blocked</text>
-<text x="1000" y="344" fill="#168056" font-size="16" font-family="JetBrains Mono, monospace">verified by demo/</text>
-<text x="1000" y="365" fill="#168056" font-size="16" font-family="JetBrains Mono, monospace">controlled_db_debugging</text>
+<text x="1000" y="180" fill="#607486" font-size="14" font-weight="700" letter-spacing="1">AGENT-READY CONTEXT</text>
+<text x="1000" y="210" fill="#172b3a" font-size="20" font-weight="700">Relevant data, meaning,</text>
+<text x="1000" y="235" fill="#172b3a" font-size="20" font-weight="700">and approved scope</text>
+<text x="1000" y="262" fill="#607486" font-size="14" font-weight="700" letter-spacing="1">GUARDRAILS</text>
+<rect x="1000" y="278" width="160" height="36" rx="8" fill="#f2fbf7" stroke="#2ec47a" stroke-opacity=".6"/>
+<text x="1080" y="302" text-anchor="middle" fill="#168056" font-size="16" font-family="JetBrains Mono, monospace">Read only</text>
+<rect x="1174" y="278" width="186" height="36" rx="8" fill="#edf7fe" stroke="#1a8fe0" stroke-opacity=".6"/>
+<text x="1267" y="302" text-anchor="middle" fill="#1a8fe0" font-size="16" font-family="JetBrains Mono, monospace">Approved access</text>
+<text x="1000" y="356" fill="#168056" font-size="16" font-family="JetBrains Mono, monospace">No writes. No schema changes.</text>
 </g>
 
 <g font-family="Inter, Arial, sans-serif">
