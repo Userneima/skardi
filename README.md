@@ -10,10 +10,7 @@
 **Skardi is an open-source governed data access layer for AI agents.**
 Describe the data an agent may use, explain what it means, and expose only the queries you want it to run.
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="asset/skardi-flame-mascot-dark.png">
-  <img src="asset/skardi-flame-mascot-transparent.png" alt="Skardi flame mascot" width="150">
-</picture>
+<img src="asset/skardi-flame-mascot-blink.gif" alt="Skardi flame mascot blinking" width="150">
 
 <p align="center">
   <a href="https://github.com/SkardiLabs/skardi" title="Star Skardi on GitHub"><picture><source media="(prefers-color-scheme: dark)" srcset="asset/readme-star-button-dark.svg"><img src="asset/readme-star-button.svg" alt="Star Skardi on GitHub" width="125" height="36" align="absmiddle"></picture></a>&nbsp;·&nbsp;
