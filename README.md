@@ -1,8 +1,8 @@
 <div align="center">
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="asset/controlled-db-debugging-hero-dark.svg">
-  <img src="asset/controlled-db-debugging-hero.svg" alt="Skardi controlled database debugging: reviewed staging data and semantics lead to a safe agent diagnosis, while UPDATE and DROP TABLE are blocked." width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="asset/controlled-db-debugging-hero-dark.gif">
+  <img src="asset/controlled-db-debugging-hero.gif" alt="Skardi controlled database debugging: reviewed staging data and semantics lead to a safe agent diagnosis, while UPDATE and DROP TABLE are blocked." width="100%">
 </picture>
 
 # Give coding agents the right data — safely.

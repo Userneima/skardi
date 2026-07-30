@@ -57,7 +57,8 @@
 <text x="1080" y="302" text-anchor="middle" fill="#b64545" font-size="16" font-family="JetBrains Mono, monospace">UPDATE blocked</text>
 <rect x="1174" y="278" width="196" height="36" rx="8" fill="#fff4f4" stroke="#dd6b6b" stroke-opacity=".6"/>
 <text x="1272" y="302" text-anchor="middle" fill="#b64545" font-size="16" font-family="JetBrains Mono, monospace">DROP TABLE blocked</text>
-<text x="1000" y="356" fill="#168056" font-size="17" font-family="JetBrains Mono, monospace">verified by demo/controlled_db_debugging</text>
+<text x="1000" y="350" fill="#168056" font-size="16" font-family="JetBrains Mono, monospace">verified by demo/</text>
+<text x="1000" y="371" fill="#168056" font-size="16" font-family="JetBrains Mono, monospace">controlled_db_debugging</text>
 </g>
 
 <g font-family="Inter, Arial, sans-serif">
