@@ -10,13 +10,11 @@
 **Skardi is an open-source governed data access layer for AI agents.**
 Describe the data an agent may use, explain what it means, and expose only the queries you want it to run.
 
-<img src="asset/skardi-flame-mascot-blink.gif" alt="Skardi flame mascot blinking" width="150">
-
 <p align="center">
-  <a href="https://github.com/SkardiLabs/skardi" title="Star Skardi on GitHub"><picture><source media="(prefers-color-scheme: dark)" srcset="asset/readme-star-button-dark.svg"><img src="asset/readme-star-button.svg" alt="Star Skardi on GitHub" width="125" height="36" align="absmiddle"></picture></a>&nbsp;·&nbsp;
-  <a href="https://www.skardi.ai/" title="Visit skardi.ai"><picture><source media="(prefers-color-scheme: dark)" srcset="asset/readme-website-button-dark.svg"><img src="asset/readme-website-button.svg" alt="Visit skardi.ai" width="95" height="36" align="absmiddle"></picture></a>&nbsp;·&nbsp;
-  <a href="https://skardilabs.github.io/skardi-docs/" title="Read the Skardi documentation"><picture><source media="(prefers-color-scheme: dark)" srcset="asset/readme-docs-button-dark.svg"><img src="asset/readme-docs-button.svg" alt="Read the Skardi documentation" width="67" height="36" align="absmiddle"></picture></a>&nbsp;·&nbsp;
-  <a href="https://discord.gg/S5YQQPEV2m" title="Join the Skardi Discord community"><picture><source media="(prefers-color-scheme: dark)" srcset="asset/readme-discord-button-dark.svg"><img src="asset/readme-discord-button.svg" alt="Join the Skardi Discord community" width="86" height="36" align="absmiddle"></picture></a>
+  <a href="https://github.com/SkardiLabs/skardi" title="Star Skardi on GitHub"><img src="asset/readme-star-button.svg" alt="Star Skardi on GitHub" width="125" height="36" align="absmiddle"></a>&nbsp;·&nbsp;
+  <a href="https://www.skardi.ai/" title="Visit skardi.ai"><img src="asset/readme-website-button.svg" alt="Visit skardi.ai" width="95" height="36" align="absmiddle"></a>&nbsp;·&nbsp;
+  <a href="https://skardilabs.github.io/skardi-docs/" title="Read the Skardi documentation"><img src="asset/readme-docs-button.svg" alt="Read the Skardi documentation" width="67" height="36" align="absmiddle"></a>&nbsp;·&nbsp;
+  <a href="https://discord.gg/S5YQQPEV2m" title="Join the Skardi Discord community"><img src="asset/readme-discord-button.svg" alt="Join the Skardi Discord community" width="86" height="36" align="absmiddle"></a>
 </p>
 
 </div>
