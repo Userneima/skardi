@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="470" viewBox="0 0 1440 470" role="img" aria-labelledby="t d">
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="365" viewBox="60 40 1320 342" role="img" aria-labelledby="t d">
 <title id="t">Skardi governed context for coding agents</title>
 <desc id="d">Connected sources and context definitions flow through Skardi to give a coding agent governed, read-only data context and approved access.</desc>
 <defs>
@@ -8,10 +8,6 @@
 <marker id="ag" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#2ec47a"/></marker>
 <marker id="ab" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#1a8fe0"/></marker>
 </defs>
-<rect width="1440" height="470" rx="24" fill="url(#bg)"/>
-<path d="M0 118H1440M0 236H1440M0 354H1440" stroke="#133048" stroke-opacity=".05"/>
-<path d="M240 0V470M480 0V470M720 0V470M960 0V470M1200 0V470" stroke="#133048" stroke-opacity=".05"/>
-
 <!-- top column labels (CocoIndex-style) -->
 <g font-family="Inter, Arial, sans-serif" text-anchor="middle" font-size="19" font-weight="700" letter-spacing="3">
 <text x="232" y="56" fill="#168056">YOUR INPUTS</text>
@@ -60,8 +56,4 @@
 <text x="1000" y="356" fill="#168056" font-size="16" font-family="JetBrains Mono, monospace">No writes. No schema changes.</text>
 </g>
 
-<g font-family="Inter, Arial, sans-serif">
-<text x="62" y="432" fill="#607486" font-size="16">Data stays governed. Agents receive only the context and access you approve.</text>
-<text x="1378" y="432" text-anchor="end" fill="#94a7b6" font-size="16">skardi.ai</text>
-</g>
 </svg>

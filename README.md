@@ -1,22 +1,28 @@
 <div align="center">
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="asset/controlled-db-debugging-hero-dark.gif">
-  <img src="asset/controlled-db-debugging-hero.gif" alt="Skardi diagram: connected sources and context definitions become governed context for a read-only coding agent." width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="asset/controlled-db-debugging-hero-dark.svg">
+  <img src="asset/controlled-db-debugging-hero.svg" alt="Skardi diagram: connected sources and context definitions become governed context for a read-only coding agent." width="100%">
 </picture>
 
 # Give coding agents the right data — safely.
 
-<p align="center">
-  <strong>Star Skardi ❤️ →</strong>&nbsp;&nbsp;
-  <a href="https://github.com/SkardiLabs/skardi" title="Star Skardi on GitHub"><img src="asset/skardi-star.gif" alt="Animation highlighting Skardi's GitHub Star button" width="380" height="110" align="absmiddle"></a>
-</p>
+<table align="center">
+  <tr>
+    <td valign="middle"><strong>Star Skardi ❤️ →</strong></td>
+    <td valign="middle"><a href="https://github.com/SkardiLabs/skardi" title="Star Skardi on GitHub"><img src="asset/skardi-star.gif" alt="Animation highlighting Skardi's GitHub Star button" width="380" height="110"></a></td>
+  </tr>
+</table>
 
-<p align="center">
-  <a href="https://www.skardi.ai/" title="Visit skardi.ai"><img src="asset/readme-website-button.svg" alt="Visit skardi.ai" width="127" height="48" align="absmiddle"></a>&nbsp;·&nbsp;
-  <a href="https://skardilabs.github.io/skardi-docs/" title="Read the Skardi documentation"><img src="asset/readme-docs-button.svg" alt="Read the Skardi documentation" width="89" height="48" align="absmiddle"></a>&nbsp;·&nbsp;
-  <a href="https://discord.gg/S5YQQPEV2m" title="Join the Skardi Discord community"><img src="asset/readme-discord-button.svg" alt="Join the Skardi Discord community" width="115" height="48" align="absmiddle"></a>
-</p>
+<table align="center">
+  <tr>
+    <td><a href="https://www.skardi.ai/" title="Visit skardi.ai"><img src="asset/readme-website-button.svg" alt="Visit skardi.ai" width="127" height="48"></a></td>
+    <td>&nbsp;·&nbsp;</td>
+    <td><a href="https://skardilabs.github.io/skardi-docs/" title="Read the Skardi documentation"><img src="asset/readme-docs-button.svg" alt="Read the Skardi documentation" width="89" height="48"></a></td>
+    <td>&nbsp;·&nbsp;</td>
+    <td><a href="https://discord.gg/S5YQQPEV2m" title="Join the Skardi Discord community"><img src="asset/readme-discord-button.svg" alt="Join the Skardi Discord community" width="115" height="48"></a></td>
+  </tr>
+</table>
 
 **Skardi is an open-source governed data access layer for AI agents.**
 Describe the data an agent may use, explain what it means, and expose only the queries you want it to run.
