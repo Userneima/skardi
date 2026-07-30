@@ -46,6 +46,31 @@
         0%, 100% { opacity: 0.22; }
         50%      { opacity: 0.55; }
       }
+
+      @media (prefers-color-scheme: dark) {
+        .ink   { fill: #e6edf3; }
+        .ink2  { fill: #a8b3bf; }
+        .ink3  { fill: #8b949e; }
+        .card        { fill: #161b22; stroke: #30363d; }
+        .card-soft   { fill: #0d1117; stroke: #30363d; }
+        .card-accent { fill: #161b22; stroke: #58a6ff; }
+        .head-soft   { fill: #1c2128; stroke: #30363d; }
+        .head-accent { fill: #0d283d; stroke: #58a6ff; }
+        .pill-accent { fill: #0d283d; stroke: #58a6ff; }
+        .pill-warn   { fill: #35270f; stroke: #d29922; }
+        .pill-base   { fill: #1c2128; stroke: #30363d; }
+        .divider     { stroke: #30363d; }
+        .icon-bg     { fill: #0d283d; stroke: #58a6ff; }
+        .icon-bg-w   { fill: #35270f; stroke: #d29922; }
+        rect[fill="#ffffff"] { fill: #161b22; }
+        rect[fill="#fafcfe"] { fill: #1c2128; }
+        rect[fill="#e6f6fc"] { fill: #0d283d; }
+        rect[fill="#f6f8fa"] { fill: #1c2128; }
+        rect[fill="#fff4e0"] { fill: #35270f; }
+        rect[stroke="#d1d9e0"] { stroke: #30363d; }
+        rect[stroke="#eaeef2"] { stroke: #30363d; }
+        pattern#grid path { stroke: #8b949e; stroke-opacity: 0.12; }
+      }
     ]]></style>
 
     <marker id="arrow-accent" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">

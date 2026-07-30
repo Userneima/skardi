@@ -1,5 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="134" height="72" viewBox="0 0 134 72" role="img" aria-label="Read the Skardi documentation">
-  <rect x="1" y="1" width="132" height="70" rx="35" fill="#fbfcfe" stroke="#cfd8e3" stroke-width="2"/>
+  <style>@media (prefers-color-scheme: dark) { .surface { fill: #132635; stroke: #36546a; } .label { fill: #eff8ff; } }</style>
+  <rect class="surface" x="1" y="1" width="132" height="70" rx="35" fill="#fbfcfe" stroke="#cfd8e3" stroke-width="2"/>
   <g transform="translate(22 18) scale(1.5)" fill="none" stroke="#178456" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v16"/><path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z"/></g>
-  <text x="68" y="45" fill="#1f2937" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700">Docs</text>
+  <text class="label" x="68" y="45" fill="#1f2937" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700">Docs</text>
 </svg>

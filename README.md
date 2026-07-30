@@ -2,13 +2,15 @@
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="asset/controlled-db-debugging-hero-dark.gif">
-  <img src="asset/controlled-db-debugging-hero.gif" alt="Skardi controlled database debugging: reviewed staging data and semantics lead to a safe agent diagnosis, while UPDATE and DROP TABLE are blocked." width="100%">
+  <img src="asset/controlled-db-debugging-hero.gif" alt="Skardi diagram: connected sources and context definitions become governed context for a read-only coding agent." width="100%">
 </picture>
 
 # Give coding agents the right data — safely.
 
 **Skardi is an open-source governed data access layer for AI agents.**
 Describe the data an agent may use, explain what it means, and expose only the queries you want it to run.
+
+<p align="center"><strong>English</strong>&nbsp;·&nbsp;<a href="README.zh-CN.md">简体中文</a></p>
 
 <p align="center">
   <a href="https://github.com/SkardiLabs/skardi" title="Star Skardi on GitHub"><img src="asset/readme-star-button.svg" alt="Star Skardi on GitHub" width="125" height="36" align="absmiddle"></a>&nbsp;·&nbsp;
@@ -216,7 +218,10 @@ See the [data-source guides](docs/) for runnable configuration examples. Skardi'
 <summary>View the open-source architecture</summary>
 
 <p align="center">
-  <img src="asset/architecture-open-source.gif" alt="Skardi open-source architecture" width="100%">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="asset/architecture-open-source.svg">
+    <img src="asset/architecture-open-source.gif" alt="Skardi open-source architecture" width="100%">
+  </picture>
 </p>
 
 </details>
