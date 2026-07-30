@@ -14,25 +14,25 @@
 
 <!-- top column labels (CocoIndex-style) -->
 <g font-family="Inter, Arial, sans-serif" text-anchor="middle" font-size="19" font-weight="700" letter-spacing="3">
-<text x="232" y="56" fill="#61DCA9">REVIEWED · INPUT</text>
+<text x="232" y="56" fill="#61DCA9">YOUR INPUTS</text>
 <text x="690" y="56" fill="url(#skardi)">SKARDI · GOVERNS</text>
 <text x="1175" y="56" fill="#5ABBF5">AGENT · READ-ONLY</text>
 </g>
 
-<path d="M402 214 C 498 210 546 182 626 166" fill="none" stroke="#4DD99C" stroke-width="3.5" stroke-dasharray="9 10" marker-end="url(#ag)"/>
+<path d="M428 214 C 510 210 552 182 626 166" fill="none" stroke="#4DD99C" stroke-width="3.5" stroke-dasharray="9 10" marker-end="url(#ag)"/>
 <path d="M754 166 C 834 182 882 210 972 214" fill="none" stroke="#5ABBF5" stroke-width="3.5" stroke-dasharray="9 10" marker-end="url(#ab)"/>
 
 <!-- LEFT -->
 <g filter="url(#shadow)" font-family="Inter, Arial, sans-serif">
-<rect x="62" y="92" width="340" height="248" rx="18" fill="#102A3A" stroke="#4DD99C" stroke-opacity=".58"/>
-<rect x="88" y="118" width="288" height="90" rx="12" fill="#153744" stroke="#4DD99C" stroke-opacity=".32"/>
+<rect x="62" y="92" width="366" height="248" rx="18" fill="#102A3A" stroke="#4DD99C" stroke-opacity=".58"/>
+<rect x="88" y="118" width="314" height="90" rx="12" fill="#153744" stroke="#4DD99C" stroke-opacity=".32"/>
 <g transform="translate(104 148) scale(1)" fill="none" stroke="#61DCA9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></g>
-<text x="150" y="157" fill="#EEF8FF" font-size="22" font-weight="700">Fake staging SQLite</text>
-<text x="150" y="183" fill="#AEC3D2" font-size="16">customers + payments</text>
-<rect x="88" y="224" width="288" height="90" rx="12" fill="#153744" stroke="#4DD99C" stroke-opacity=".32"/>
+<text x="150" y="157" fill="#EEF8FF" font-size="22" font-weight="700">Connected sources</text>
+<text x="150" y="183" fill="#AEC3D2" font-size="16">Databases · SaaS · files</text>
+<rect x="88" y="224" width="314" height="90" rx="12" fill="#153744" stroke="#4DD99C" stroke-opacity=".32"/>
 <g transform="translate(104 254) scale(1)" fill="none" stroke="#61DCA9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h.01"/><path d="M3 12h.01"/><path d="M3 19h.01"/><path d="M8 5h13"/><path d="M8 12h13"/><path d="M8 19h13"/></g>
-<text x="150" y="263" fill="#EEF8FF" font-size="22" font-weight="700">Reviewed semantics</text>
-<text x="150" y="289" fill="#AEC3D2" font-size="16">what each table and field means</text>
+<text x="150" y="263" fill="#EEF8FF" font-size="22" font-weight="700">Context definitions</text>
+<text x="150" y="289" fill="#AEC3D2" font-size="16">data meaning + agent scope</text>
 </g>
 
 <!-- CENTER logo hub -->
@@ -57,12 +57,12 @@
 <text x="1080" y="302" text-anchor="middle" fill="#FF9A9A" font-size="16" font-family="JetBrains Mono, monospace">UPDATE blocked</text>
 <rect x="1174" y="278" width="196" height="36" rx="8" fill="#48232C" stroke="#F58D8D" stroke-opacity=".6"/>
 <text x="1272" y="302" text-anchor="middle" fill="#FF9A9A" font-size="16" font-family="JetBrains Mono, monospace">DROP TABLE blocked</text>
-<text x="1000" y="350" fill="#61DCA9" font-size="16" font-family="JetBrains Mono, monospace">verified by demo/</text>
-<text x="1000" y="371" fill="#61DCA9" font-size="16" font-family="JetBrains Mono, monospace">controlled_db_debugging</text>
+<text x="1000" y="344" fill="#61DCA9" font-size="16" font-family="JetBrains Mono, monospace">verified by demo/</text>
+<text x="1000" y="365" fill="#61DCA9" font-size="16" font-family="JetBrains Mono, monospace">controlled_db_debugging</text>
 </g>
 
 <g font-family="Inter, Arial, sans-serif">
-<text x="62" y="432" fill="#AEC3D2" font-size="16">Only fake data. The agent sees reviewed meaning and a declared, read-only task.</text>
+<text x="62" y="432" fill="#AEC3D2" font-size="16">Data stays governed. Agents receive only the context and access you approve.</text>
 <text x="1378" y="432" text-anchor="end" fill="#88A9BD" font-size="16">skardi.ai</text>
 </g>
 </svg>
