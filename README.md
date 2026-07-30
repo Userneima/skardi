@@ -5,12 +5,14 @@
   <img src="asset/controlled-db-debugging-hero.svg" alt="Skardi diagram: connected sources and context definitions become governed context for a read-only coding agent." width="100%">
 </picture>
 
+<br>
+
 <p align="center">
   <strong>Star Skardi ❤️ →</strong>&nbsp;
-  <kbd><a href="https://github.com/SkardiLabs/skardi" title="Star Skardi on GitHub"><img src="asset/skardi-star-compact.gif" alt="Animation highlighting Skardi's GitHub Star button" width="150" height="58"></a></kbd>&nbsp;·&nbsp;
-  <kbd><a href="https://www.skardi.ai/" title="Visit skardi.ai"><img src="asset/readme-website-button.svg" alt="Visit skardi.ai" width="127" height="48"></a></kbd>&nbsp;·&nbsp;
-  <kbd><a href="https://skardilabs.github.io/skardi-docs/" title="Read the Skardi documentation"><img src="asset/readme-docs-button.svg" alt="Read the Skardi documentation" width="89" height="48"></a></kbd>&nbsp;·&nbsp;
-  <kbd><a href="https://discord.gg/S5YQQPEV2m" title="Join the Skardi Discord community"><img src="asset/readme-discord-button.svg" alt="Join the Skardi Discord community" width="115" height="48"></a></kbd>
+  <ruby><a href="https://github.com/SkardiLabs/skardi" title="Star Skardi on GitHub"><img src="asset/skardi-star-compact.gif" alt="Animation highlighting Skardi's GitHub Star button" width="150" height="58"></a></ruby>&nbsp;·&nbsp;
+  <ruby><a href="https://www.skardi.ai/" title="Visit skardi.ai"><img src="asset/readme-website-button.svg" alt="Visit skardi.ai" width="127" height="48"></a></ruby>&nbsp;·&nbsp;
+  <ruby><a href="https://skardilabs.github.io/skardi-docs/" title="Read the Skardi documentation"><img src="asset/readme-docs-button.svg" alt="Read the Skardi documentation" width="89" height="48"></a></ruby>&nbsp;·&nbsp;
+  <ruby><a href="https://discord.gg/S5YQQPEV2m" title="Join the Skardi Discord community"><img src="asset/readme-discord-button.svg" alt="Join the Skardi Discord community" width="115" height="48"></a></ruby>
 </p>
 
 # Give coding agents the right data — safely.
