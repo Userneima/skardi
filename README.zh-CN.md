@@ -10,13 +10,21 @@
 **Skardi 是面向 AI Agent 的开源、受治理数据访问层。**
 定义 Agent 可以使用哪些数据，解释数据的业务含义，并只暴露你希望它执行的查询。
 
+<p align="center">
+  <a href="https://github.com/SkardiLabs/skardi/stargazers"><img src="https://img.shields.io/github/stars/SkardiLabs/skardi?style=flat-square&amp;label=stars&amp;color=f4b400" alt="GitHub stars"></a>
+  <a href="https://github.com/SkardiLabs/skardi/actions/workflows/ci.yml"><img src="https://github.com/SkardiLabs/skardi/actions/workflows/ci.yml/badge.svg?branch=main" alt="CI status"></a>
+  <a href="https://crates.io/crates/skardi"><img src="https://img.shields.io/crates/v/skardi.svg?style=flat-square" alt="skardi crate 版本"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-2563eb?style=flat-square" alt="Apache-2.0 许可证"></a>
+  <a href="https://discord.gg/S5YQQPEV2m"><img src="https://img.shields.io/badge/Discord-Join-5865F2?style=flat-square&amp;logo=discord&amp;logoColor=white" alt="加入 Skardi Discord"></a>
+</p>
+
 <p align="center"><a href="README.md">English</a>&nbsp;·&nbsp;<strong>简体中文</strong></p>
 
 <p align="center">
-  <a href="https://github.com/SkardiLabs/skardi" title="在 GitHub 上 Star Skardi"><img src="asset/readme-star-button.svg" alt="在 GitHub 上 Star Skardi" width="125" height="36" align="absmiddle"></a>&nbsp;·&nbsp;
-  <a href="https://www.skardi.ai/" title="访问 skardi.ai"><img src="asset/readme-website-button.svg" alt="访问 skardi.ai" width="95" height="36" align="absmiddle"></a>&nbsp;·&nbsp;
-  <a href="https://skardilabs.github.io/skardi-docs/" title="阅读 Skardi 文档"><img src="asset/readme-docs-button.svg" alt="阅读 Skardi 文档" width="67" height="36" align="absmiddle"></a>&nbsp;·&nbsp;
-  <a href="https://discord.gg/S5YQQPEV2m" title="加入 Skardi Discord 社区"><img src="asset/readme-discord-button.svg" alt="加入 Skardi Discord 社区" width="86" height="36" align="absmiddle"></a>
+  <a href="https://github.com/SkardiLabs/skardi" title="在 GitHub 上 Star Skardi"><img src="asset/readme-star-button.svg" alt="在 GitHub 上 Star Skardi" width="167" height="48" align="absmiddle"></a>&nbsp;·&nbsp;
+  <a href="https://www.skardi.ai/" title="访问 skardi.ai"><img src="asset/readme-website-button.svg" alt="访问 skardi.ai" width="127" height="48" align="absmiddle"></a>&nbsp;·&nbsp;
+  <a href="https://skardilabs.github.io/skardi-docs/" title="阅读 Skardi 文档"><img src="asset/readme-docs-button.svg" alt="阅读 Skardi 文档" width="89" height="48" align="absmiddle"></a>&nbsp;·&nbsp;
+  <a href="https://discord.gg/S5YQQPEV2m" title="加入 Skardi Discord 社区"><img src="asset/readme-discord-button.svg" alt="加入 Skardi Discord 社区" width="115" height="48" align="absmiddle"></a>
 </p>
 
 </div>

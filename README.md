@@ -10,13 +10,21 @@
 **Skardi is an open-source governed data access layer for AI agents.**
 Describe the data an agent may use, explain what it means, and expose only the queries you want it to run.
 
+<p align="center">
+  <a href="https://github.com/SkardiLabs/skardi/stargazers"><img src="https://img.shields.io/github/stars/SkardiLabs/skardi?style=flat-square&amp;label=stars&amp;color=f4b400" alt="GitHub stars"></a>
+  <a href="https://github.com/SkardiLabs/skardi/actions/workflows/ci.yml"><img src="https://github.com/SkardiLabs/skardi/actions/workflows/ci.yml/badge.svg?branch=main" alt="CI status"></a>
+  <a href="https://crates.io/crates/skardi"><img src="https://img.shields.io/crates/v/skardi.svg?style=flat-square" alt="skardi crate version"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-2563eb?style=flat-square" alt="Apache-2.0 license"></a>
+  <a href="https://discord.gg/S5YQQPEV2m"><img src="https://img.shields.io/badge/Discord-Join-5865F2?style=flat-square&amp;logo=discord&amp;logoColor=white" alt="Join Skardi on Discord"></a>
+</p>
+
 <p align="center"><strong>English</strong>&nbsp;·&nbsp;<a href="README.zh-CN.md">简体中文</a></p>
 
 <p align="center">
-  <a href="https://github.com/SkardiLabs/skardi" title="Star Skardi on GitHub"><img src="asset/readme-star-button.svg" alt="Star Skardi on GitHub" width="125" height="36" align="absmiddle"></a>&nbsp;·&nbsp;
-  <a href="https://www.skardi.ai/" title="Visit skardi.ai"><img src="asset/readme-website-button.svg" alt="Visit skardi.ai" width="95" height="36" align="absmiddle"></a>&nbsp;·&nbsp;
-  <a href="https://skardilabs.github.io/skardi-docs/" title="Read the Skardi documentation"><img src="asset/readme-docs-button.svg" alt="Read the Skardi documentation" width="67" height="36" align="absmiddle"></a>&nbsp;·&nbsp;
-  <a href="https://discord.gg/S5YQQPEV2m" title="Join the Skardi Discord community"><img src="asset/readme-discord-button.svg" alt="Join the Skardi Discord community" width="86" height="36" align="absmiddle"></a>
+  <a href="https://github.com/SkardiLabs/skardi" title="Star Skardi on GitHub"><img src="asset/readme-star-button.svg" alt="Star Skardi on GitHub" width="167" height="48" align="absmiddle"></a>&nbsp;·&nbsp;
+  <a href="https://www.skardi.ai/" title="Visit skardi.ai"><img src="asset/readme-website-button.svg" alt="Visit skardi.ai" width="127" height="48" align="absmiddle"></a>&nbsp;·&nbsp;
+  <a href="https://skardilabs.github.io/skardi-docs/" title="Read the Skardi documentation"><img src="asset/readme-docs-button.svg" alt="Read the Skardi documentation" width="89" height="48" align="absmiddle"></a>&nbsp;·&nbsp;
+  <a href="https://discord.gg/S5YQQPEV2m" title="Join the Skardi Discord community"><img src="asset/readme-discord-button.svg" alt="Join the Skardi Discord community" width="115" height="48" align="absmiddle"></a>
 </p>
 
 </div>
