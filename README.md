@@ -8,7 +8,11 @@
 # Give coding agents the right data — safely.
 
 <p align="center">
-  <a href="https://github.com/SkardiLabs/skardi" title="Star Skardi on GitHub"><img src="asset/readme-star-button.svg" alt="Star Skardi on GitHub" width="167" height="48" align="absmiddle"></a>&nbsp;·&nbsp;
+  <strong>Star Skardi ❤️ →</strong>&nbsp;&nbsp;
+  <a href="https://github.com/SkardiLabs/skardi" title="Star Skardi on GitHub"><img src="asset/skardi-star.gif" alt="Animation highlighting Skardi's GitHub Star button" width="380" height="110" align="absmiddle"></a>
+</p>
+
+<p align="center">
   <a href="https://www.skardi.ai/" title="Visit skardi.ai"><img src="asset/readme-website-button.svg" alt="Visit skardi.ai" width="127" height="48" align="absmiddle"></a>&nbsp;·&nbsp;
   <a href="https://skardilabs.github.io/skardi-docs/" title="Read the Skardi documentation"><img src="asset/readme-docs-button.svg" alt="Read the Skardi documentation" width="89" height="48" align="absmiddle"></a>&nbsp;·&nbsp;
   <a href="https://discord.gg/S5YQQPEV2m" title="Join the Skardi Discord community"><img src="asset/readme-discord-button.svg" alt="Join the Skardi Discord community" width="115" height="48" align="absmiddle"></a>
