@@ -5,8 +5,6 @@
   <img src="asset/controlled-db-debugging-hero.svg" alt="Skardi 流程图：连接的数据源和上下文定义经治理后，成为编程 Agent 可安全使用的只读上下文。" width="100%">
 </picture>
 
-# 让编程 Agent 安全地获得正确的数据。
-
 <table align="center">
   <tr>
     <td valign="middle"><strong>给 Skardi 点星 ❤️ →</strong></td>
@@ -23,6 +21,8 @@
     <td><a href="https://discord.gg/S5YQQPEV2m" title="加入 Skardi Discord 社区"><img src="asset/readme-discord-button.svg" alt="加入 Skardi Discord 社区" width="115" height="48"></a></td>
   </tr>
 </table>
+
+# 让编程 Agent 安全地获得正确的数据。
 
 **Skardi 是面向 AI Agent 的开源、受治理数据访问层。**
 定义 Agent 可以使用哪些数据，解释数据的业务含义，并只暴露你希望它执行的查询。

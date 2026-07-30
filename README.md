@@ -5,8 +5,6 @@
   <img src="asset/controlled-db-debugging-hero.svg" alt="Skardi diagram: connected sources and context definitions become governed context for a read-only coding agent." width="100%">
 </picture>
 
-# Give coding agents the right data — safely.
-
 <table align="center">
   <tr>
     <td valign="middle"><strong>Star Skardi ❤️ →</strong></td>
@@ -23,6 +21,8 @@
     <td><a href="https://discord.gg/S5YQQPEV2m" title="Join the Skardi Discord community"><img src="asset/readme-discord-button.svg" alt="Join the Skardi Discord community" width="115" height="48"></a></td>
   </tr>
 </table>
+
+# Give coding agents the right data — safely.
 
 **Skardi is an open-source governed data access layer for AI agents.**
 Describe the data an agent may use, explain what it means, and expose only the queries you want it to run.
