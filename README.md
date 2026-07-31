@@ -15,7 +15,7 @@
   <a href="https://discord.gg/S5YQQPEV2m" title="Join the Skardi Discord community"><img src="asset/readme-discord-button.svg" alt="Join the Skardi Discord community" width="115" height="48" align="absmiddle"></a>
 </p>
 
-# Give coding agents the right data — safely.
+# Give coding agents context they can trust.
 
 **Skardi is an open-source governed data access layer for AI agents.**
 Describe the data an agent may use, explain what it means, and expose only the queries you want it to run.
