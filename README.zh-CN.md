@@ -17,8 +17,7 @@
 
 # 让编程 Agent 获得可信的上下文。
 
-**Skardi 是面向 AI Agent 的开源、受治理数据访问层。**
-定义 Agent 可以使用哪些数据，解释数据的业务含义，并只暴露你希望它执行的查询。
+**Skardi 将你批准使用的数据转化为供编程 Agent 使用的受治理上下文。** 定义 Agent 可以使用哪些数据源，解释每张表和字段的业务含义，并只暴露它完成任务所需的只读查询或 pipeline——让 Agent 无需获得宽泛的数据库权限，也能基于可信上下文完成工作。
 
 <p align="center">
   <a href="https://github.com/SkardiLabs/skardi/stargazers"><img src="https://img.shields.io/github/stars/SkardiLabs/skardi?style=flat-square&amp;label=stars&amp;color=f4b400" alt="GitHub stars"></a>

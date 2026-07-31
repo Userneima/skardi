@@ -17,8 +17,7 @@
 
 # Give coding agents context they can trust.
 
-**Skardi is an open-source governed data access layer for AI agents.**
-Describe the data an agent may use, explain what it means, and expose only the queries you want it to run.
+**Skardi turns the data you approve into governed context for coding agents.** Define which sources an agent may use, explain the business meaning of every table and field, and expose only the read-only queries or pipelines it needs—so agents can work from context they can trust without broad database access.
 
 <p align="center">
   <a href="https://github.com/SkardiLabs/skardi/stargazers"><img src="https://img.shields.io/github/stars/SkardiLabs/skardi?style=flat-square&amp;label=stars&amp;color=f4b400" alt="GitHub stars"></a>
