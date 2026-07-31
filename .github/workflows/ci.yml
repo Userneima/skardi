@@ -2,7 +2,7 @@ name: CI
 
 on:
   push:
-    branches: [ main, master, develop ]
+    branches: [ main, master, develop, preview/readme ]
   pull_request:
     branches: [ main, master, develop ]
 
@@ -23,6 +23,8 @@ jobs:
       RUSTDOCFLAGS: "--cfg docsrs -D warnings"
     steps:
       - uses: actions/checkout@v4
+      - name: Verify README hero contract
+        run: bash scripts/check-readme-hero.sh
       - name: Install Rust toolchain
         uses: dtolnay/rust-toolchain@stable
       - uses: Swatinem/rust-cache@v2
