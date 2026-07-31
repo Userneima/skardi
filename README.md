@@ -9,10 +9,10 @@
 
 <p align="center">
   <strong>Star Skardi ❤️ →</strong>&nbsp;
-  <ruby><a href="https://github.com/SkardiLabs/skardi" title="Star Skardi on GitHub"><img src="asset/skardi-star-compact.gif" alt="Animation highlighting Skardi's GitHub Star button" width="150" height="58"></a></ruby>&nbsp;·&nbsp;
-  <ruby><a href="https://www.skardi.ai/" title="Visit skardi.ai"><img src="asset/readme-website-button.svg" alt="Visit skardi.ai" width="127" height="48"></a></ruby>&nbsp;·&nbsp;
-  <ruby><a href="https://skardilabs.github.io/skardi-docs/docs/intro" title="Read the Skardi documentation"><img src="asset/readme-docs-button.svg" alt="Read the Skardi documentation" width="89" height="48"></a></ruby>&nbsp;·&nbsp;
-  <ruby><a href="https://discord.gg/S5YQQPEV2m" title="Join the Skardi Discord community"><img src="asset/readme-discord-button.svg" alt="Join the Skardi Discord community" width="115" height="48"></a></ruby>
+  <ruby><a href="https://github.com/SkardiLabs/skardi" title="Star Skardi on GitHub"><img src="asset/skardi-star-compact.gif" alt="Star Skardi on GitHub" width="141" height="50" align="middle"></a></ruby>&nbsp;·&nbsp;
+  <ruby><a href="https://www.skardi.ai/" title="Visit skardi.ai"><img src="asset/readme-website-button.svg" alt="Visit skardi.ai" width="127" height="48" align="middle"></a></ruby>&nbsp;·&nbsp;
+  <ruby><a href="https://skardilabs.github.io/skardi-docs/docs/intro" title="Read the Skardi documentation"><img src="asset/readme-docs-button.svg" alt="Read the Skardi documentation" width="89" height="48" align="middle"></a></ruby>&nbsp;·&nbsp;
+  <ruby><a href="https://discord.gg/S5YQQPEV2m" title="Join the Skardi Discord community"><img src="asset/readme-discord-button.svg" alt="Join the Skardi Discord community" width="115" height="48" align="middle"></a></ruby>
 </p>
 
 # Give coding agents the right data — safely.
@@ -34,18 +34,47 @@ Describe the data an agent may use, explain what it means, and expose only the q
 
 ---
 
-## Get started
+## Start with your goal
 
-From a terminal, clone Skardi, install the CLI, and run a first read-only query:
+Skardi can start as a local command-line tool, an agent workflow, or a shared HTTP service. Choose the task you need to complete; you do not need every component to get started.
+
+### Install the CLI
+
+From a terminal, clone Skardi and install the minimal CLI:
 
 ```bash
 git clone https://github.com/SkardiLabs/skardi.git
 cd skardi
 cargo install --locked --path crates/cli --no-default-features
+```
+
+Pre-built releases, embeddings, and other installation options are in the [installation docs](https://skardilabs.github.io/skardi-docs/).
+
+### Verify it with an example query
+
+Run a first read-only query against the example CSV in the repository:
+
+```bash
 skardi query --sql "SELECT * FROM './data/products.csv' LIMIT 5"
 ```
 
-This installs the minimal `skardi` CLI and queries the example CSV in the repository. Pre-built releases, embeddings, and other installation options are in the [installation docs](https://skardilabs.github.io/skardi-docs/).
+You should see the first five rows from `data/products.csv`.
+
+### Use local documents with an agent
+
+The [`auto_knowledge_base`](https://github.com/SkardiLabs/skardi-skills/tree/main/auto_knowledge_base) skill turns a folder of documents into a local, cited retrieval workflow. It is an optional onboarding path for local documents; beneath the workflow, Skardi CLI handles the data locally.
+
+### Serve a small application backend
+
+A YAML pipeline becomes a parameterized REST endpoint without writing application glue. See [pipelines](docs/pipelines.md) and the [simple backend demo](demo/simple_backend/).
+
+### How the pieces fit
+
+- **CLI** runs local configuration and queries against files, databases, and object stores.
+- **Server** exposes reviewed YAML pipelines as HTTP endpoints for applications or shared agent tasks.
+- **Skills** package optional agent workflows, such as a local knowledge base or server-backed RAG.
+
+CLI and Server are runtime options. Skills are installed only when a task calls for their workflow.
 
 ---
 
@@ -136,16 +165,6 @@ skardi query --ctx ctx.yaml --sql "SELECT status, COUNT(*) FROM orders GROUP BY 
 ```
 
 For a shared or recurring task, use a pipeline instead. The server makes the pipeline available at `POST /:name/execute`, with parameters inferred from its SQL.
-
----
-
-## Other ways to start
-
-**Explore files and databases from the CLI.** Query local CSV, Parquet, JSON, SQLite, and registered database sources without running a server. Start with the [CLI guide](docs/cli.md).
-
-**Build a local document knowledge base.** The [`auto_knowledge_base`](https://github.com/SkardiLabs/skardi-skills/tree/main/auto_knowledge_base) skill turns a folder of documents into a local, cited retrieval workflow. It is a separate onboarding path for local documents.
-
-**Serve a small application backend.** A YAML pipeline becomes a parameterized REST endpoint without writing application glue. See [pipelines](docs/pipelines.md) and the [simple backend demo](demo/simple_backend/).
 
 ---
 
