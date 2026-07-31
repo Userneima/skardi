@@ -2,16 +2,16 @@
 set -euo pipefail
 
 readonly hero_references=(
-  "README.md:asset/controlled-db-debugging-hero.gif"
-  "README.md:asset/controlled-db-debugging-hero-dark.gif"
-  "README.zh-CN.md:asset/controlled-db-debugging-hero-zh-CN.gif"
-  "README.zh-CN.md:asset/controlled-db-debugging-hero-zh-CN-dark.gif"
+  "README.md:asset/controlled-db-debugging-hero.png"
+  "README.md:asset/controlled-db-debugging-hero-dark.png"
+  "README.zh-CN.md:asset/controlled-db-debugging-hero-zh-CN.png"
+  "README.zh-CN.md:asset/controlled-db-debugging-hero-zh-CN-dark.png"
 )
 readonly hero_assets=(
-  "asset/controlled-db-debugging-hero.gif"
-  "asset/controlled-db-debugging-hero-dark.gif"
-  "asset/controlled-db-debugging-hero-zh-CN.gif"
-  "asset/controlled-db-debugging-hero-zh-CN-dark.gif"
+  "asset/controlled-db-debugging-hero.png"
+  "asset/controlled-db-debugging-hero-dark.png"
+  "asset/controlled-db-debugging-hero-zh-CN.png"
+  "asset/controlled-db-debugging-hero-zh-CN-dark.png"
 )
 readonly mascot_asset="asset/skardi-flame-mascot-blink.gif"
 
@@ -26,8 +26,13 @@ for reference in "${hero_references[@]}"; do
   }
 done
 
-for asset in "${hero_assets[@]}" "$mascot_asset"; do
+for asset in "${hero_assets[@]}"; do
   [[ -f "$asset" ]] || { echo "Missing hero asset: $asset" >&2; exit 1; }
+  codec_name="$(ffprobe -v error -select_streams v:0 -show_entries stream=codec_name -of default=noprint_wrappers=1:nokey=1 "$asset")"
+  [[ "$codec_name" == "apng" ]] || {
+    echo "Hero asset must be a full-colour APNG: $asset" >&2
+    exit 1
+  }
   frame_count="$(ffprobe -v error -select_streams v:0 -count_frames -show_entries stream=nb_read_frames -of csv=p=0 "$asset")"
   [[ "$frame_count" =~ ^[0-9]+$ && "$frame_count" -gt 1 ]] || {
     echo "Hero asset must remain animated: $asset" >&2
@@ -35,4 +40,11 @@ for asset in "${hero_assets[@]}" "$mascot_asset"; do
   }
 done
 
-echo "README hero contract verified: all light, dark, English, and Chinese variants use animated smile assets."
+[[ -f "$mascot_asset" ]] || { echo "Missing blink mascot source: $mascot_asset" >&2; exit 1; }
+mascot_frame_count="$(ffprobe -v error -select_streams v:0 -count_frames -show_entries stream=nb_read_frames -of csv=p=0 "$mascot_asset")"
+[[ "$mascot_frame_count" =~ ^[0-9]+$ && "$mascot_frame_count" -gt 1 ]] || {
+  echo "Blink mascot source must remain animated: $mascot_asset" >&2
+  exit 1
+}
+
+echo "README hero contract verified: all light, dark, English, and Chinese variants use animated full-colour APNG assets."

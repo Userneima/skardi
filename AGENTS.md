@@ -110,7 +110,7 @@ Pipelines are YAML files parsed into `StandardPipeline`. Parameter types and res
 
 - Every public API (`pub fn`, `pub struct`, `pub trait`) in the `skardi` crate should have a doc comment with at least one example.
 - When you add or rename a feature, update [README.md](README.md) and the relevant page under [docs/](docs/) in the same PR. The README's feature list and supported-sources table are user-facing; let them drift and they become wrong.
-- The README hero is a four-variant contract (English/Chinese × light/dark): it must render as direct animated GIF assets with the smiling blinking mascot; do not nest a GIF inside an SVG, because GitHub does not load that reliably. Run `bash scripts/check-readme-hero.sh` after modifying `README*.md` or `asset/controlled-db-debugging-hero*`.
+- The README hero is a four-variant contract (English/Chinese × light/dark): it must render as direct full-colour animated APNG assets with the smiling blinking mascot; do not nest an animated asset inside an SVG, because GitHub does not load that reliably. The static source flame must not remain under the animated mascot. Run `bash scripts/check-readme-hero.sh` after modifying `README*.md` or `asset/controlled-db-debugging-hero*`.
 - Comments explain **why**, not **what**. If a comment restates the code, delete it. If a comment captures a non-obvious invariant, a workaround for an upstream bug, or a performance trade-off, keep it.
 
 ## Commits and PRs
