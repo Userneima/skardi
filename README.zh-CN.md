@@ -34,54 +34,15 @@
 
 ---
 
-## 看看它如何工作：不改动数据，诊断一次支付失败
+## 给 Agent 一份受治理的数据约定
 
-一个编程 Agent 需要回答：**Acme Robotics 的支付为什么会在结账流程变更后失败？**
+Agent 要回答一个具体问题，不需要一份权限过宽的数据库凭据。Skardi 将数据访问约定拆成三份与代码共同维护的文件：
 
-这个可运行的 demo 只使用模拟的 SQLite 数据。它让 Agent 查看经过审核的表含义，返回诊断所需的记录，并在服务启动前拒绝 `UPDATE` 和 `DROP TABLE`。
+- **Context（上下文）**：Agent 可以使用哪些已注册数据源。数据源默认只读；写入需要显式配置。
+- **Semantics（语义）**：开发者写下的表和字段说明，让 Agent 不必猜测 `status`、`customer` 或 `amount` 的业务含义。
+- **Pipelines（管道）**：具名、参数化的任务。它将高频查询作为收窄的 REST 接口提供，而不是暴露一个通用 SQL 入口。
 
-```bash
-git clone https://github.com/SkardiLabs/skardi.git
-cd skardi
-bash demo/controlled_db_debugging/verify.sh
-```
-
-检查会在需要时构建本地二进制文件，然后输出：
-
-```text
-== 1. Agent-visible semantic context ==
-table: payments  -- Payment attempts from the checkout service.
-  processor_response: Utf8  -- Short diagnostic returned by the payment processor.
-
-== 2. Unsafe operations are rejected before serving ==
-Verified rejection: attempt_refund.yaml
-Verified rejection: attempt_drop_table.yaml
-
-== 3. Run the safe diagnostic endpoint ==
-Verified safe diagnostic result: Acme Robotics failed after 3DS.
-```
-
-完整 demo 见：[它验证了什么，以及如何运作](demo/controlled_db_debugging/README.md)。
-
----
-
-## 为什么是 Skardi？
-
-只给 Agent 一个数据库连接远远不够。它仍然需要知道哪个数据源相关、字段在业务中代表什么，以及哪些内容绝不能改动。
-
-没有 Skardi 时，团队常在两个不理想的默认方案中选择：把原始 schema 或数据导出放进提示词，或者给 Agent 一份权限过宽的数据库凭据。两者都会让错误更容易发生。
-
-使用 Skardi，你在与代码一起维护的文件中定义三件事：
-
-- **Context（上下文）**：有哪些数据源可用，以及每个数据源是只读还是被明确允许写入。
-- **Semantics（语义）**：对表和列的自然语言描述，让 `status` 或 `customer` 有经过审核的含义，而不是靠猜测。
-- **Pipelines（管道）**：像 `diagnose-failed-payments` 这样的具名、参数化任务，可作为 REST endpoint 供共享的 Agent 工作流调用。
-
-Agent 可以通过 CLI 做本地探索，也可以通过 HTTP 调用已声明的 pipeline。拥有数据的开发者同样能检查这些定义。
-
-**流程：**你的数据 → context YAML → semantics YAML → 具名 pipeline → CLI 或 REST。
-
----
+开发者可以在执行前审查这份约定。Agent 既可通过 CLI 在本地查看已批准的上下文，也可在共享工作流中调用已声明的 pipeline。
 
 ## 用你自己的数据开始
 
@@ -204,7 +165,6 @@ Skardi 可以跨以下数据查询和 join：
 
 ## 示例
 
-- [受控数据库调试](demo/controlled_db_debugging/) —— 用模拟 staging 数据排查一次支付失败，并证明写入和 DDL 会被拒绝。
 - [简单后端](demo/simple_backend/) —— 将一个小型 SQLite 后端暴露为 REST endpoints。
 - [Agent 原生 wiki](demo/llm_wiki/) —— 混合检索、内联 embeddings 和面向 Agent 的动词。
 - [RAG](demo/rag/) —— 端到端的检索增强生成工作流。

@@ -34,54 +34,15 @@ Describe the data an agent may use, explain what it means, and expose only the q
 
 ---
 
-## See it work: diagnose a failed payment without changing data
+## Give agents a governed data contract
 
-A coding agent needs to answer: **why did Acme Robotics' payment fail after a checkout change?**
+An agent answering a narrow question should not need a broad database credential. Skardi keeps the data-access contract in three files that live with your code:
 
-The runnable demo uses only fake SQLite data. It lets the agent inspect reviewed table meanings, returns the rows needed for the diagnosis, and rejects an `UPDATE` plus a `DROP TABLE` before the server starts.
+- **Context**: the registered sources an agent may use. Sources are read-only by default; writing requires an explicit configuration choice.
+- **Semantics**: developer-written descriptions of tables and columns, so an agent does not have to guess what `status`, `customer`, or `amount` means.
+- **Pipelines**: named, parameterized tasks that make a recurring query available through a narrow REST interface instead of a general SQL endpoint.
 
-```bash
-git clone https://github.com/SkardiLabs/skardi.git
-cd skardi
-bash demo/controlled_db_debugging/verify.sh
-```
-
-The check builds the local binaries if needed, then produces:
-
-```text
-== 1. Agent-visible semantic context ==
-table: payments  -- Payment attempts from the checkout service.
-  processor_response: Utf8  -- Short diagnostic returned by the payment processor.
-
-== 2. Unsafe operations are rejected before serving ==
-Verified rejection: attempt_refund.yaml
-Verified rejection: attempt_drop_table.yaml
-
-== 3. Run the safe diagnostic endpoint ==
-Verified safe diagnostic result: Acme Robotics failed after 3DS.
-```
-
-This is the full demo: [what it verifies and how it works](demo/controlled_db_debugging/README.md).
-
----
-
-## Why Skardi?
-
-Giving an agent a database connection is not enough. It still has to know which source matters, what a field means in the business, and what it must not change.
-
-Without Skardi, teams often choose between two poor defaults: put a raw schema or data dump in the prompt, or give the agent a broad database credential. Both make mistakes easier.
-
-With Skardi, you define three things in files that live with your code:
-
-- **Context**: which data sources are available and whether each is read-only or explicitly writable.
-- **Semantics**: plain-language descriptions of tables and columns, so `status` or `customer` has a reviewed meaning instead of a guessed one.
-- **Pipelines**: named, parameterized tasks such as `diagnose-failed-payments`, exposed as REST endpoints for a shared agent workflow.
-
-The agent can use the CLI for local exploration, or call a declared pipeline through HTTP. The same definitions are inspectable by the developer who owns the data.
-
-**Flow:** your data → context YAML → semantics YAML → named pipeline → CLI or REST.
-
----
+Developers can review this contract before it runs. An agent can inspect the approved context locally with the CLI, or call a declared pipeline from a shared workflow.
 
 ## Start with your own data
 
@@ -204,7 +165,6 @@ See the [data-source guides](docs/) for runnable configuration examples. Skardi'
 
 ## Examples
 
-- [Controlled database debugging](demo/controlled_db_debugging/) — investigate a failed payment with fake staging data; prove writes and DDL are rejected.
 - [Simple backend](demo/simple_backend/) — expose a small SQLite backend as REST endpoints.
 - [Agent-native wiki](demo/llm_wiki/) — hybrid retrieval, inline embeddings, and agent-facing verbs.
 - [RAG](demo/rag/) — an end-to-end retrieval-augmented generation workflow.
