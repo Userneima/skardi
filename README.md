@@ -33,11 +33,11 @@
 
 ---
 
-## Start with your goal
+## Quick start
 
-Skardi can start as a local command-line tool, an agent workflow, or a shared HTTP service. Choose the task you need to complete; you do not need every component to get started.
+Clone Skardi, install the minimal CLI, and run a read-only query against the sample data already included in the repository.
 
-### Install the CLI
+### 1. Install the CLI
 
 From a terminal, clone Skardi and install the minimal CLI:
 
@@ -49,15 +49,25 @@ cargo install --locked --path crates/cli --no-default-features
 
 Pre-built releases, embeddings, and other installation options are in the [installation docs](https://skardilabs.github.io/skardi-docs/).
 
-### Verify it with an example query
+### 2. Verify it with the built-in sample
 
-Run a first read-only query against the example CSV in the repository:
+`data/products.csv` is cloned with the repository, so no separate download or setup is required:
 
 ```bash
 skardi query --sql "SELECT * FROM './data/products.csv' LIMIT 5"
 ```
 
 You should see the first five rows from `data/products.csv`.
+
+---
+
+## Continue from your goal
+
+The quick start is enough to verify the CLI. Choose one of the optional paths below when you are ready for a specific workflow; you do not need every component.
+
+### Query local files or data sources
+
+Use the CLI for local configuration and read-only queries against files, databases, or object stores. Start with the [CLI guide](docs/cli.md) and [data-source guides](docs/).
 
 ### Use local documents with an agent
 
@@ -66,14 +76,6 @@ The [`auto_knowledge_base`](https://github.com/SkardiLabs/skardi-skills/tree/mai
 ### Serve a small application backend
 
 A YAML pipeline becomes a parameterized REST endpoint without writing application glue. See [pipelines](docs/pipelines.md) and the [simple backend demo](demo/simple_backend/).
-
-### How the pieces fit
-
-- **CLI** runs local configuration and queries against files, databases, and object stores.
-- **Server** exposes reviewed YAML pipelines as HTTP endpoints for applications or shared agent tasks.
-- **Skills** package optional agent workflows, such as a local knowledge base or server-backed RAG.
-
-CLI and Server are runtime options. Skills are installed only when a task calls for their workflow.
 
 ---
 

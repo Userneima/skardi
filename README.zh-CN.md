@@ -33,11 +33,11 @@
 
 ---
 
-## 从你的目标开始
+## 快速上手
 
-Skardi 可以作为本地命令行工具、Agent 工作流或共享 HTTP 服务开始使用。按你想完成的任务来选；开始时不需要安装所有组件。
+克隆 Skardi，安装精简版 CLI，然后对仓库已内置的示例数据执行一次只读查询。
 
-### 安装 CLI
+### 1. 安装 CLI
 
 在终端中克隆 Skardi，并安装精简版 CLI：
 
@@ -49,15 +49,25 @@ cargo install --locked --path crates/cli --no-default-features
 
 预构建版本、嵌入功能和其他安装方式见[安装文档](https://skardilabs.github.io/skardi-docs/)。
 
-### 用示例查询验证
+### 2. 用内置示例验证
 
-对仓库中的示例 CSV 执行第一次只读查询：
+克隆仓库时，`data/products.csv` 会一并下载到本地，无需另行准备数据：
 
 ```bash
 skardi query --sql "SELECT * FROM './data/products.csv' LIMIT 5"
 ```
 
 你会看到 `data/products.csv` 的前五行。
+
+---
+
+## 按你的目标继续
+
+快速上手只用于验证 CLI。需要某种具体工作流时，再从下面的可选路径中选择；不需要安装所有组件。
+
+### 查询本地文件或数据源
+
+使用 CLI 在本地配置数据源，并对文件、数据库或对象存储执行只读查询。可从 [CLI 指南](docs/cli.md) 和[数据源指南](docs/)开始。
 
 ### 用 Agent 处理本地文档
 
@@ -66,14 +76,6 @@ skardi query --sql "SELECT * FROM './data/products.csv' LIMIT 5"
 ### 提供小型应用后端
 
 一份 YAML pipeline 无需编写应用胶水代码，即可成为参数化 REST endpoint。参见 [pipelines](docs/pipelines.md) 和[简单后端 demo](demo/simple_backend/)。
-
-### 各部分如何配合
-
-- **CLI** 在本地运行配置和查询，可连接文件、数据库和对象存储。
-- **Server** 将审核过的 YAML pipeline 暴露为 HTTP endpoint，供应用或共享的 Agent 任务使用。
-- **Skills** 打包可选的 Agent 工作流，例如本地知识库或由 Server 支持的 RAG。
-
-CLI 和 Server 是运行时入口。只在任务需要相应工作流时再安装 Skill。
 
 ---
 
