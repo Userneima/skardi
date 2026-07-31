@@ -1,8 +1,8 @@
 <div align="center">
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="asset/controlled-db-debugging-hero-dark.svg">
-  <img src="asset/controlled-db-debugging-hero.svg" alt="Skardi diagram: connected sources and context definitions become governed context for a read-only coding agent." width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="asset/controlled-db-debugging-hero-dark.gif">
+  <img src="asset/controlled-db-debugging-hero.gif" alt="Skardi diagram: connected sources and context definitions become governed context for a read-only coding agent." width="100%">
 </picture>
 
 <br>
