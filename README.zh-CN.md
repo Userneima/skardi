@@ -143,11 +143,11 @@ skardi query --ctx ctx.yaml --sql "SELECT status, COUNT(*) FROM orders GROUP BY 
 
 ## 其他开始方式
 
-**通过 CLI 探索文件和数据库。**无需启动 server，即可查询本地 CSV、Parquet、JSON、SQLite 以及已注册的数据库数据源。从 [CLI guide](docs/cli.md) 开始。
+<strong>通过 CLI 探索文件和数据库。</strong>无需启动 server，即可查询本地 CSV、Parquet、JSON、SQLite 以及已注册的数据库数据源。从 [CLI guide](docs/cli.md) 开始。
 
-**构建本地文档知识库。**[`auto_knowledge_base`](https://github.com/SkardiLabs/skardi-skills/tree/main/auto_knowledge_base) skill 会把一个文档文件夹变成本地、可追溯引用的检索工作流。这是面向本地文档的独立上手路径。
+<strong>构建本地文档知识库。</strong>[`auto_knowledge_base`](https://github.com/SkardiLabs/skardi-skills/tree/main/auto_knowledge_base) skill 会把一个文档文件夹变成本地、可追溯引用的检索工作流。这是面向本地文档的独立上手路径。
 
-**提供小型应用后端。**一份 YAML pipeline 无需编写应用胶水代码，即可成为参数化 REST endpoint。参见 [pipelines](docs/pipelines.md) 和[简单后端 demo](demo/simple_backend/)。
+<strong>提供小型应用后端。</strong>一份 YAML pipeline 无需编写应用胶水代码，即可成为参数化 REST endpoint。参见 [pipelines](docs/pipelines.md) 和[简单后端 demo](demo/simple_backend/)。
 
 ---
 
