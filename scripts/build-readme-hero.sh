@@ -10,9 +10,9 @@ readonly hero_pairs=(
   "controlled-db-debugging-hero-zh-CN.svg:controlled-db-debugging-hero-zh-CN.png"
   "controlled-db-debugging-hero-zh-CN-dark.svg:controlled-db-debugging-hero-zh-CN-dark.png"
 )
-readonly mascot_size=320
-readonly mascot_x=1220
-readonly mascot_y=120
+readonly mascot_size=384
+readonly mascot_x=1188
+readonly mascot_y=88
 readonly dash_cycle_frames=19
 
 command -v ffmpeg >/dev/null || { echo "ffmpeg is required to build README hero assets." >&2; exit 1; }
