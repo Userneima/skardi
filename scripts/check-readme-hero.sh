@@ -16,6 +16,7 @@ readonly hero_assets=(
 readonly mascot_asset="asset/skardi-flame-mascot-blink.gif"
 
 command -v ffprobe >/dev/null || { echo "ffprobe is required to validate animated README assets." >&2; exit 1; }
+command -v ffmpeg >/dev/null || { echo "ffmpeg is required to validate animated README assets." >&2; exit 1; }
 
 for reference in "${hero_references[@]}"; do
   readme_file="${reference%%:*}"
@@ -47,4 +48,16 @@ mascot_frame_count="$(ffprobe -v error -select_streams v:0 -count_frames -show_e
   exit 1
 }
 
-echo "README hero contract verified: all light, dark, English, and Chinese variants use animated full-colour APNG assets."
+flow_check_dir="$(mktemp -d /tmp/skardi-readme-flow-check.XXXXXX)"
+trap 'rm -rf "$flow_check_dir"' EXIT
+for asset in "${hero_assets[@]}"; do
+  first_frame="$flow_check_dir/$(basename "$asset")-first.png"
+  later_frame="$flow_check_dir/$(basename "$asset")-later.png"
+  ffmpeg -y -hide_banner -loglevel error -i "$asset" -frames:v 1 "$first_frame"
+  ffmpeg -y -hide_banner -loglevel error -ss 0.45 -i "$asset" -frames:v 1 "$later_frame"
+  cmp -s "$first_frame" "$later_frame" || continue
+  echo "Hero data-flow dashes must move within the animation: $asset" >&2
+  exit 1
+done
+
+echo "README hero contract verified: all light, dark, English, and Chinese variants use animated full-colour APNG assets with moving data-flow dashes."
