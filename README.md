@@ -63,19 +63,43 @@ You should see the first five rows from `data/products.csv`.
 
 ## Continue from your goal
 
-The quick start is enough to verify the CLI. Choose one of the optional paths below when you are ready for a specific workflow; you do not need every component.
+The quick start only verifies the CLI. Choose the outcome you need next, then paste its prompt into your coding agent. The agent should inspect the workspace, make the smallest safe change, and report what it verified; the linked docs are only a fallback when you need more control.
 
-### Query local files or data sources
+### 01 — Query local files or data sources
 
-Use the CLI for local configuration and read-only queries against files, databases, or object stores. Start with the [CLI guide](docs/cli.md) and [data-source guides](docs/).
+Use this path to inspect a CSV, Parquet file, database, or object store without changing it.
 
-### Use local documents with an agent
+**Paste this into your coding agent:**
 
-The [`auto_knowledge_base`](https://github.com/SkardiLabs/skardi-skills/tree/main/auto_knowledge_base) skill turns a folder of documents into a local, cited retrieval workflow. It is an optional onboarding path for local documents; beneath the workflow, Skardi CLI handles the data locally.
+```text
+Help me query a local file or data source with Skardi. Inspect this workspace for candidate files and existing Skardi configuration. If the target is unclear, ask me which file or data source to use. Keep every source read-only, preserve credentials as environment variables, and do not change data or schemas. Create only the smallest configuration needed, run a schema check and one useful query, then report the files you created, the command you ran, and the result.
+```
 
-### Serve a small application backend
+Need more control? See the [CLI guide](docs/cli.md) and [data-source guides](docs/).
 
-A YAML pipeline becomes a parameterized REST endpoint without writing application glue. See [pipelines](docs/pipelines.md) and the [simple backend demo](demo/simple_backend/).
+### 02 — Use local documents with an agent
+
+Use this path to turn a folder of documents into a local knowledge base that an agent can search and cite.
+
+**Paste this into your coding agent:**
+
+```text
+Build a local, cited knowledge base for the documents in this workspace with Skardi. First read the auto_knowledge_base skill at https://github.com/SkardiLabs/skardi-skills/tree/main/auto_knowledge_base. Identify the document folder; if it is unclear, ask me before continuing. Use the skill's local default unless the corpus or my environment requires another choice. Keep the knowledge-base workspace separate from my source documents, verify ingestion with one retrieval query, and report the workspace location, the commands run, and cited results.
+```
+
+The [`auto_knowledge_base`](https://github.com/SkardiLabs/skardi-skills/tree/main/auto_knowledge_base) skill contains the full setup and troubleshooting details.
+
+### 03 — Serve a small application backend
+
+Use this path to expose one reviewed task as a parameterized REST endpoint, without writing application glue or publishing a general SQL endpoint.
+
+**Paste this into your coding agent:**
+
+```text
+Create the smallest safe Skardi HTTP backend for one application task in this workspace. Inspect the existing data and configuration first; if the task, source, or required response is unclear, ask me before generating files. Create a read-only context and semantics definition, then add a SELECT-only YAML pipeline for the task. Do not expose a general SQL endpoint, write to data, or change schemas. Start skardi-server, verify the endpoint with one request, and report the configuration files, endpoint, request, and response.
+```
+
+For a runnable reference, see [pipelines](docs/pipelines.md) and the [simple backend demo](demo/simple_backend/).
 
 ---
 

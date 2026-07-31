@@ -63,19 +63,43 @@ skardi query --sql "SELECT * FROM './data/products.csv' LIMIT 5"
 
 ## 按你的目标继续
 
-快速上手只用于验证 CLI。需要某种具体工作流时，再从下面的可选路径中选择；不需要安装所有组件。
+快速上手只用于验证 CLI。接下来按你想完成的结果选择路径，并把对应提示词直接发给编程 Agent。Agent 会先检查当前工作区，以最小且安全的方式落地，再说明它验证了什么；只有需要更多控制时才查阅链接的文档。
 
-### 查询本地文件或数据源
+### 01 — 查询本地文件或数据源
 
-使用 CLI 在本地配置数据源，并对文件、数据库或对象存储执行只读查询。可从 [CLI 指南](docs/cli.md) 和[数据源指南](docs/)开始。
+适合查看 CSV、Parquet、数据库或对象存储中的数据，且不改动原始数据。
 
-### 用 Agent 处理本地文档
+**直接发给你的编程 Agent：**
 
-[`auto_knowledge_base`](https://github.com/SkardiLabs/skardi-skills/tree/main/auto_knowledge_base) skill 会将一个文档文件夹变成本地、可追溯引用的检索工作流。这是面向本地文档的可选上手路径；工作流底层由 Skardi CLI 在本地处理数据。
+```text
+帮我用 Skardi 查询本地文件或数据源。先检查当前工作区中的候选文件和已有 Skardi 配置；如果目标不明确，先问我需要查询哪个文件或数据源。所有数据源保持只读，凭据通过环境变量保留，不修改数据或 Schema。只创建必要的最小配置，执行一次 schema 检查和一条有用的查询，最后说明创建了哪些文件、运行了什么命令，以及查询结果。
+```
 
-### 提供小型应用后端
+需要更多控制时，再看 [CLI 指南](docs/cli.md) 和[数据源指南](docs/)。
 
-一份 YAML pipeline 无需编写应用胶水代码，即可成为参数化 REST endpoint。参见 [pipelines](docs/pipelines.md) 和[简单后端 demo](demo/simple_backend/)。
+### 02 — 用 Agent 处理本地文档
+
+适合将一个文档文件夹变成本地知识库，让 Agent 可以检索并给出可追溯的引用。
+
+**直接发给你的编程 Agent：**
+
+```text
+用 Skardi 为当前工作区中的文档建立一个本地、可追溯引用的知识库。先阅读 auto_knowledge_base skill：https://github.com/SkardiLabs/skardi-skills/tree/main/auto_knowledge_base。识别要处理的文档文件夹；如果不明确，继续前先问我。除非文档类型或环境有特殊要求，否则采用 skill 的本地默认方案。知识库工作区必须与我的源文档分开；完成后用一次检索查询验证，并说明工作区位置、运行过的命令和带引用的结果。
+```
+
+完整的配置和排错细节见 [`auto_knowledge_base`](https://github.com/SkardiLabs/skardi-skills/tree/main/auto_knowledge_base) skill。
+
+### 03 — 提供小型应用后端
+
+适合把一个已审核的任务变成参数化 REST endpoint，而不是暴露通用 SQL 接口或另写应用胶水代码。
+
+**直接发给你的编程 Agent：**
+
+```text
+在当前工作区中，为一个具体应用任务创建最小且安全的 Skardi HTTP 后端。先检查现有数据和配置；如果任务、数据源或需要返回的结果不明确，先问我再生成文件。创建只读的 context 和 semantics 定义，并为该任务添加一份只含 SELECT 的 YAML pipeline。不要暴露通用 SQL endpoint，不写入数据，也不修改 Schema。启动 skardi-server，用一次请求验证 endpoint，最后说明配置文件、endpoint、请求和响应。
+```
+
+可运行的参考见 [pipelines](docs/pipelines.md) 和[简单后端 demo](demo/simple_backend/)。
 
 ---
 
