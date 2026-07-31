@@ -34,30 +34,26 @@
 
 ---
 
-## 给 Agent 一份受治理的数据约定
+## 开始使用
 
-Agent 要回答一个具体问题，不需要一份权限过宽的数据库凭据。Skardi 将数据访问约定拆成三份与代码共同维护的文件：
-
-- **Context（上下文）**：Agent 可以使用哪些已注册数据源。数据源默认只读；写入需要显式配置。
-- **Semantics（语义）**：开发者写下的表和字段说明，让 Agent 不必猜测 `status`、`customer` 或 `amount` 的业务含义。
-- **Pipelines（管道）**：具名、参数化的任务。它将高频查询作为收窄的 REST 接口提供，而不是暴露一个通用 SQL 入口。
-
-开发者可以在执行前审查这份约定。Agent 既可通过 CLI 在本地查看已批准的上下文，也可在共享工作流中调用已声明的 pipeline。
-
-## 用你自己的数据开始
-
-### 1. 安装工具
-
-若要连接数据库，请从源码检出中同时安装 CLI 和 HTTP server：
+在终端中克隆 Skardi、安装 CLI，并执行第一次只读查询：
 
 ```bash
-cargo install --locked --path crates/cli
-cargo install --locked --path crates/server
+git clone https://github.com/SkardiLabs/skardi.git
+cd skardi
+cargo install --locked --path crates/cli --no-default-features
+skardi query --sql "SELECT * FROM './data/products.csv' LIMIT 5"
 ```
 
-预构建版本和其他安装方式见[安装文档](https://skardilabs.github.io/skardi-docs/)。
+这会安装精简版 `skardi` CLI，并查询仓库中的示例 CSV。预构建版本、嵌入功能和其他安装方式见[安装文档](https://skardilabs.github.io/skardi-docs/)。
 
-### 2. 只注册当前任务需要的数据源
+---
+
+## 连接你自己的数据
+
+当你需要具名数据库数据源或共享的 Agent endpoint 时，再将一份小而可审查的数据约定放进代码库。
+
+### 1. 只注册当前任务需要的数据源
 
 ```yaml
 # ctx.yaml
@@ -77,7 +73,7 @@ spec:
       # access_mode defaults to read_only
 ```
 
-### 3. 写下开发者已审核的业务含义
+### 2. 写下开发者已审核的业务含义
 
 ```yaml
 # semantics.yaml
@@ -95,7 +91,7 @@ spec:
           description: "UTC timestamp when the order was created."
 ```
 
-### 4. 将重复任务收敛成窄接口
+### 3. 将重复任务收敛成窄接口
 
 ```yaml
 # pipelines/order-status.yaml
@@ -112,6 +108,8 @@ spec:
 ```
 
 ```bash
+cargo install --locked --path crates/server
+
 skardi-server --ctx ctx.yaml --semantics semantics.yaml --pipeline pipelines/ --port 8080
 
 curl -X POST http://localhost:8080/order-status/execute \

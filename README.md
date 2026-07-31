@@ -34,30 +34,26 @@ Describe the data an agent may use, explain what it means, and expose only the q
 
 ---
 
-## Give agents a governed data contract
+## Get started
 
-An agent answering a narrow question should not need a broad database credential. Skardi keeps the data-access contract in three files that live with your code:
-
-- **Context**: the registered sources an agent may use. Sources are read-only by default; writing requires an explicit configuration choice.
-- **Semantics**: developer-written descriptions of tables and columns, so an agent does not have to guess what `status`, `customer`, or `amount` means.
-- **Pipelines**: named, parameterized tasks that make a recurring query available through a narrow REST interface instead of a general SQL endpoint.
-
-Developers can review this contract before it runs. An agent can inspect the approved context locally with the CLI, or call a declared pipeline from a shared workflow.
-
-## Start with your own data
-
-### 1. Install the tools
-
-For the database path, install both the CLI and the HTTP server from a source checkout:
+From a terminal, clone Skardi, install the CLI, and run a first read-only query:
 
 ```bash
-cargo install --locked --path crates/cli
-cargo install --locked --path crates/server
+git clone https://github.com/SkardiLabs/skardi.git
+cd skardi
+cargo install --locked --path crates/cli --no-default-features
+skardi query --sql "SELECT * FROM './data/products.csv' LIMIT 5"
 ```
 
-Pre-built releases and installation alternatives are in the [installation docs](https://skardilabs.github.io/skardi-docs/).
+This installs the minimal `skardi` CLI and queries the example CSV in the repository. Pre-built releases, embeddings, and other installation options are in the [installation docs](https://skardilabs.github.io/skardi-docs/).
 
-### 2. Register only the source the task needs
+---
+
+## Connect your own data
+
+When you need a named database source or a shared agent endpoint, add a small, reviewable data contract to your codebase.
+
+### 1. Register only the source the task needs
 
 ```yaml
 # ctx.yaml
@@ -77,7 +73,7 @@ spec:
       # access_mode defaults to read_only
 ```
 
-### 3. Add the business meaning a developer has reviewed
+### 2. Add the business meaning a developer has reviewed
 
 ```yaml
 # semantics.yaml
@@ -95,7 +91,7 @@ spec:
           description: "UTC timestamp when the order was created."
 ```
 
-### 4. Turn a recurring task into a narrow interface
+### 3. Turn a recurring task into a narrow interface
 
 ```yaml
 # pipelines/order-status.yaml
@@ -112,6 +108,8 @@ spec:
 ```
 
 ```bash
+cargo install --locked --path crates/server
+
 skardi-server --ctx ctx.yaml --semantics semantics.yaml --pipeline pipelines/ --port 8080
 
 curl -X POST http://localhost:8080/order-status/execute \
