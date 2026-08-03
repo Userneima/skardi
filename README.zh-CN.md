@@ -35,35 +35,46 @@
 
 ## 快速上手
 
-克隆 Skardi，安装精简版 CLI，然后对仓库已内置的示例数据执行一次只读查询。
+克隆 Skardi，用仓库已内置的示例数据启动一个 server，再从 CLI 对它执行一次只读查询。
 
-### 1. 安装 CLI
+Skardi 有两个可执行文件，这个分工很关键：`skardi-server` 持有查询引擎和已注册的数据源，`skardi` 则是一个精简的 HTTP 客户端，每条命令都发给正在运行的 server。CLI 自身没有引擎，所以先起 server。
 
-在终端中克隆 Skardi，并安装精简版 CLI：
+### 1. 安装两个可执行文件
+
+在终端中克隆 Skardi，并安装 server 和 CLI：
 
 ```bash
 git clone https://github.com/SkardiLabs/skardi.git
 cd skardi
-cargo install --locked --path crates/cli --no-default-features
+cargo install --locked --path crates/server
+cargo install --locked --path crates/cli
 ```
 
 预构建版本、嵌入功能和其他安装方式见[安装文档](https://skardilabs.github.io/skardi-docs/)。
 
-### 2. 用内置示例验证
+### 2. 用内置示例启动 server
 
-克隆仓库时，`data/products.csv` 会一并下载到本地，无需另行准备数据：
+克隆仓库时，`data/products.csv` 和注册它的 context 文件会一并下载到本地，无需另行准备数据：
 
 ```bash
-skardi query --sql "SELECT * FROM './data/products.csv' LIMIT 5"
+skardi-server --ctx docs/basic/ctx.yaml --port 8080
 ```
 
-你会看到 `data/products.csv` 的前五行。
+### 3. 从 CLI 查询
+
+在第二个终端里：
+
+```bash
+skardi query -e "SELECT * FROM products LIMIT 5" --table
+```
+
+你会看到 `data/products.csv` 的前五行。`products` 是 `docs/basic/ctx.yaml` 里声明的数据源名——CLI 只能访问 server 已注册的表。
 
 ---
 
 ## 按你的目标继续
 
-快速上手只用于验证 CLI。接下来按你想完成的结果选择路径，并把对应提示词直接发给编程 Agent。Agent 会先检查当前工作区，以最小且安全的方式落地，再说明它验证了什么；只有需要更多控制时才查阅链接的文档。
+快速上手只验证了 server 和 CLI 之间已经打通。接下来按你想完成的结果选择路径，并把对应提示词直接发给编程 Agent。Agent 会先检查当前工作区，以最小且安全的方式落地，再说明它验证了什么；只有需要更多控制时才查阅链接的文档。
 
 ### 01 — 查询本地文件或数据源
 
@@ -72,7 +83,7 @@ skardi query --sql "SELECT * FROM './data/products.csv' LIMIT 5"
 **直接发给你的编程 Agent：**
 
 ```text
-帮我用 Skardi 查询本地文件或数据源。先检查当前工作区中的候选文件和已有 Skardi 配置；如果目标不明确，先问我需要查询哪个文件或数据源。所有数据源保持只读，凭据通过环境变量保留，不修改数据或 Schema。只创建必要的最小配置，执行一次 schema 检查和一条有用的查询，最后说明创建了哪些文件、运行了什么命令，以及查询结果。
+帮我用 Skardi 查询本地文件或数据源。先检查当前工作区中的候选文件和已有 Skardi 配置；如果目标不明确，先问我需要查询哪个文件或数据源。所有数据源保持只读，凭据通过环境变量保留，不修改数据或 Schema。只创建必要的最小配置，用它启动 skardi-server，然后通过 CLI 对这个 server 执行一次 schema 检查和一条有用的查询，最后说明创建了哪些文件、运行了什么命令，以及查询结果。
 ```
 
 需要更多控制时，再看 [CLI 指南](docs/cli.md) 和[数据源指南](docs/)。
@@ -91,12 +102,12 @@ skardi query --sql "SELECT * FROM './data/products.csv' LIMIT 5"
 
 ### 03 — 提供小型应用后端
 
-适合把一个已审核的任务变成参数化 REST endpoint，而不是暴露通用 SQL 接口或另写应用胶水代码。
+适合把一个已审核的任务变成参数化 REST endpoint，既不用另写应用胶水代码，也不用把任意 SQL 留作应用的对外接口。
 
 **直接发给你的编程 Agent：**
 
 ```text
-在当前工作区中，为一个具体应用任务创建最小且安全的 Skardi HTTP 后端。先检查现有数据和配置；如果任务、数据源或需要返回的结果不明确，先问我再生成文件。创建只读的 context 和 semantics 定义，并为该任务添加一份只含 SELECT 的 YAML pipeline。不要暴露通用 SQL endpoint，不写入数据，也不修改 Schema。启动 skardi-server，用一次请求验证 endpoint，最后说明配置文件、endpoint、请求和响应。
+在当前工作区中，为一个具体应用任务创建最小且安全的 Skardi HTTP 后端。先检查现有数据和配置；如果任务、数据源或需要返回的结果不明确，先问我再生成文件。创建只读的 context 和 semantics 定义，并为该任务添加一份只含 SELECT 的 YAML pipeline。不要添加把任意 SQL 当参数的 pipeline，不写入数据，也不修改 Schema。启动 skardi-server，用一次请求验证 pipeline endpoint，最后说明配置文件、endpoint、请求和响应。
 ```
 
 可运行的参考见 [pipelines](docs/pipelines.md) 和[简单后端 demo](demo/simple_backend/)。
@@ -171,22 +182,24 @@ curl -X POST http://localhost:8080/order-status/execute \
   -d '{"from":"2026-07-01","to":"2026-08-01"}'
 ```
 
-Server 运行的是具名 pipeline，而不是暴露一个通用 SQL endpoint。除非你明确设置 `access_mode: read_write`，否则数据源均为只读；配置加载时会拒绝 pipeline 中的 DDL。精确的当前行为见[面向 Agent 的 context 边界](docs/agent_data_plane.md)。
+具名 pipeline 是你交给共享调用方的接口：SQL 事先经过审核，对外只开放参数。Server 也提供一个用于探索的临时 SQL endpoint `POST /query`，但它同样受这份 context 约束——只能访问已注册的数据源，始终拒绝 DDL 和 `COPY`，只有你显式配成 `access_mode: read_write` 的数据源才允许写入。除非你明确设置该项，否则数据源均为只读；配置加载时会拒绝 pipeline 中的 DDL。精确的当前行为见[面向 Agent 的 context 边界](docs/agent_data_plane.md)。
 
 ---
 
 ## 从 Agent 中使用 Skardi
 
-任何带有 shell 工具的编程 Agent 都可以调用 CLI。进行本地排查时，先让它读取已审核的 schema 和 semantics：
+任何带有 shell 工具的编程 Agent 都可以调用 CLI。只需一次性告诉它 server 地址——`--server <URL>`、环境变量 `SKARDI_SERVER_URL`，或 `~/.skardi/config.yaml` 里的 `server:`，默认是 `http://127.0.0.1:8080`——之后每条命令都会发给这个 server。
+
+排查问题时，先让它读取已审核的 schema 和 semantics：
 
 ```bash
-skardi query --ctx ctx.yaml --semantics semantics.yaml --schema --all
+skardi schema
 ```
 
 然后执行范围受控的查询：
 
 ```bash
-skardi query --ctx ctx.yaml --sql "SELECT status, COUNT(*) FROM orders GROUP BY status"
+skardi query -e "SELECT status, COUNT(*) FROM orders GROUP BY status"
 ```
 
 对于共享或重复发生的任务，请使用 pipeline。Server 会将它暴露为 `POST /:name/execute`，参数由其中的 SQL 推导。

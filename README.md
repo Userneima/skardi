@@ -35,35 +35,46 @@
 
 ## Quick start
 
-Clone Skardi, install the minimal CLI, and run a read-only query against the sample data already included in the repository.
+Clone Skardi, start a server over the sample data already included in the repository, and run a read-only query against it from the CLI.
 
-### 1. Install the CLI
+Skardi has two binaries, and the split matters: `skardi-server` holds the query engine and the registered sources, and `skardi` is a thin HTTP client that sends every command to a running server. The CLI has no engine of its own, so a server comes first.
 
-From a terminal, clone Skardi and install the minimal CLI:
+### 1. Install both binaries
+
+From a terminal, clone Skardi and install the server and the CLI:
 
 ```bash
 git clone https://github.com/SkardiLabs/skardi.git
 cd skardi
-cargo install --locked --path crates/cli --no-default-features
+cargo install --locked --path crates/server
+cargo install --locked --path crates/cli
 ```
 
 Pre-built releases, embeddings, and other installation options are in the [installation docs](https://skardilabs.github.io/skardi-docs/).
 
-### 2. Verify it with the built-in sample
+### 2. Start a server on the built-in sample
 
-`data/products.csv` is cloned with the repository, so no separate download or setup is required:
+`data/products.csv` and a context file that registers it are both cloned with the repository, so no separate download or setup is required:
 
 ```bash
-skardi query --sql "SELECT * FROM './data/products.csv' LIMIT 5"
+skardi-server --ctx docs/basic/ctx.yaml --port 8080
 ```
 
-You should see the first five rows from `data/products.csv`.
+### 3. Query it from the CLI
+
+In a second terminal:
+
+```bash
+skardi query -e "SELECT * FROM products LIMIT 5" --table
+```
+
+You should see the first five rows from `data/products.csv`. `products` is the source name declared in `docs/basic/ctx.yaml` — the CLI can only reach tables the server has registered.
 
 ---
 
 ## Continue from your goal
 
-The quick start only verifies the CLI. Choose the outcome you need next, then paste its prompt into your coding agent. The agent should inspect the workspace, make the smallest safe change, and report what it verified; the linked docs are only a fallback when you need more control.
+The quick start only verifies that the server and CLI are talking to each other. Choose the outcome you need next, then paste its prompt into your coding agent. The agent should inspect the workspace, make the smallest safe change, and report what it verified; the linked docs are only a fallback when you need more control.
 
 ### 01 — Query local files or data sources
 
@@ -72,7 +83,7 @@ Use this path to inspect a CSV, Parquet file, database, or object store without 
 **Paste this into your coding agent:**
 
 ```text
-Help me query a local file or data source with Skardi. Inspect this workspace for candidate files and existing Skardi configuration. If the target is unclear, ask me which file or data source to use. Keep every source read-only, preserve credentials as environment variables, and do not change data or schemas. Create only the smallest configuration needed, run a schema check and one useful query, then report the files you created, the command you ran, and the result.
+Help me query a local file or data source with Skardi. Inspect this workspace for candidate files and existing Skardi configuration. If the target is unclear, ask me which file or data source to use. Keep every source read-only, preserve credentials as environment variables, and do not change data or schemas. Create only the smallest configuration needed, start skardi-server on it, then run a schema check and one useful query through the CLI against that server, and report the files you created, the commands you ran, and the result.
 ```
 
 Need more control? See the [CLI guide](docs/cli.md) and [data-source guides](docs/).
@@ -91,12 +102,12 @@ The [`auto_knowledge_base`](https://github.com/SkardiLabs/skardi-skills/tree/mai
 
 ### 03 — Serve a small application backend
 
-Use this path to expose one reviewed task as a parameterized REST endpoint, without writing application glue or publishing a general SQL endpoint.
+Use this path to expose one reviewed task as a parameterized REST endpoint, without writing application glue and without leaving arbitrary SQL as your application's interface.
 
 **Paste this into your coding agent:**
 
 ```text
-Create the smallest safe Skardi HTTP backend for one application task in this workspace. Inspect the existing data and configuration first; if the task, source, or required response is unclear, ask me before generating files. Create a read-only context and semantics definition, then add a SELECT-only YAML pipeline for the task. Do not expose a general SQL endpoint, write to data, or change schemas. Start skardi-server, verify the endpoint with one request, and report the configuration files, endpoint, request, and response.
+Create the smallest safe Skardi HTTP backend for one application task in this workspace. Inspect the existing data and configuration first; if the task, source, or required response is unclear, ask me before generating files. Create a read-only context and semantics definition, then add a SELECT-only YAML pipeline for the task. Do not add a pipeline that takes arbitrary SQL as a parameter, write to data, or change schemas. Start skardi-server, verify the pipeline endpoint with one request, and report the configuration files, endpoint, request, and response.
 ```
 
 For a runnable reference, see [pipelines](docs/pipelines.md) and the [simple backend demo](demo/simple_backend/).
@@ -171,22 +182,24 @@ curl -X POST http://localhost:8080/order-status/execute \
   -d '{"from":"2026-07-01","to":"2026-08-01"}'
 ```
 
-The server runs the named pipeline rather than exposing a general SQL endpoint. A source is read-only unless you explicitly set `access_mode: read_write`; pipeline DDL is rejected while configuration loads. See [context boundaries for agents](docs/agent_data_plane.md) for the precise current behavior.
+The named pipeline is the interface you hand to a shared caller: the SQL is reviewed up front and only its parameters are open. The server also exposes an ad-hoc `POST /query` for exploration, but it is bounded by the same context — it reaches only registered sources, always rejects DDL and `COPY`, and allows writes only against a source you configured as `access_mode: read_write`. A source is read-only unless you set that explicitly; pipeline DDL is rejected while configuration loads. See [context boundaries for agents](docs/agent_data_plane.md) for the precise current behavior.
 
 ---
 
 ## Use Skardi from an agent
 
-Any coding agent with a shell tool can call the CLI. For a local investigation, first let it read the reviewed schema and semantics:
+Any coding agent with a shell tool can call the CLI. Point it at a running server once — `--server <URL>`, `SKARDI_SERVER_URL`, or `server:` in `~/.skardi/config.yaml`, defaulting to `http://127.0.0.1:8080` — and every command below goes to that server.
+
+For an investigation, first let it read the reviewed schema and semantics:
 
 ```bash
-skardi query --ctx ctx.yaml --semantics semantics.yaml --schema --all
+skardi schema
 ```
 
 Then it can run a scoped query:
 
 ```bash
-skardi query --ctx ctx.yaml --sql "SELECT status, COUNT(*) FROM orders GROUP BY status"
+skardi query -e "SELECT status, COUNT(*) FROM orders GROUP BY status"
 ```
 
 For a shared or recurring task, use a pipeline instead. The server makes the pipeline available at `POST /:name/execute`, with parameters inferred from its SQL.
