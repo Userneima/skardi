@@ -1,0 +1,10 @@
+kind: pipeline
+
+metadata:
+  name: attempt-drop-table
+  version: 1.0.0
+  description: "Intentionally unsafe: used only to verify DDL is rejected at startup."
+
+spec:
+  query: |
+    DROP TABLE payments

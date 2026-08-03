@@ -1,0 +1,12 @@
+kind: pipeline
+
+metadata:
+  name: attempt-refund
+  version: 1.0.0
+  description: "Intentionally unsafe: used only to verify read-only sources reject writes at startup."
+
+spec:
+  query: |
+    UPDATE payments
+    SET status = 'refunded'
+    WHERE id = {payment_id}

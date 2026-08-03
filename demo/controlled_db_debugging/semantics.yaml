@@ -1,0 +1,35 @@
+kind: semantics
+
+metadata:
+  name: controlled-db-debugging-semantics
+  version: 1.0.0
+
+spec:
+  sources:
+    - name: customers
+      description: "Customer accounts. Use this table to identify the business account behind a payment."
+      columns:
+        - name: id
+          description: "Stable internal customer identifier."
+        - name: name
+          description: "Customer's company name."
+        - name: plan
+          description: "Contracted subscription plan at the time of payment."
+
+    - name: payments
+      description: "Payment attempts from the checkout service. One row per processor attempt, not one row per invoice."
+      columns:
+        - name: id
+          description: "Stable identifier for one payment attempt."
+        - name: customer_id
+          description: "Customer account that initiated this attempt; joins to customers.id."
+        - name: amount_cents
+          description: "Attempted payment amount in USD cents."
+        - name: status
+          description: "Processor outcome: captured or failed."
+        - name: failure_code
+          description: "Processor failure category. NULL for captured payments."
+        - name: processor_response
+          description: "Short diagnostic returned by the payment processor; not customer-facing text."
+        - name: created_at
+          description: "UTC timestamp when the checkout service sent the attempt."

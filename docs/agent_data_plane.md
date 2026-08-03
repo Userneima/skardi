@@ -32,10 +32,10 @@ For a recurring agent task, use four steps:
 3. **Declare the recurring task as a pipeline.** Parameterize the time range, account, or other variables instead of passing a broad connection string to the agent.
 4. **Return the result to the caller.** The server runs the named pipeline; it does not expose a general SQL endpoint.
 
-For example, an order-support agent can call an `order-status` pipeline
-with a date range. The agent receives the status counts and the semantic
-description needed to interpret them, while the database remains behind a
-reviewed source definition and a declared task interface.
+For example, an order-support agent can first read the reviewed source
+description through `GET /data_source`, then call an `order-status` pipeline
+with a date range. The pipeline returns the status counts; the database
+remains behind a reviewed source definition and a declared task interface.
 
 ```mermaid
 flowchart LR

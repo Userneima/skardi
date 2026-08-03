@@ -1,0 +1,21 @@
+kind: context
+
+metadata:
+  name: controlled-db-debugging
+  version: 1.0.0
+
+spec:
+  data_sources:
+    - name: customers
+      type: sqlite
+      access_mode: read_only
+      path: demo/controlled_db_debugging/staging.db
+      options:
+        table: customers
+
+    - name: payments
+      type: sqlite
+      access_mode: read_only
+      path: demo/controlled_db_debugging/staging.db
+      options:
+        table: payments

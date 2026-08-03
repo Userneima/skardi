@@ -1,0 +1,22 @@
+kind: pipeline
+
+metadata:
+  name: diagnose-failed-payments
+  version: 1.0.0
+  description: "Show recent failed payment attempts with the customer and processor diagnostic needed for investigation."
+
+spec:
+  query: |
+    SELECT
+      p.id,
+      c.name AS customer_name,
+      c.plan,
+      p.amount_cents,
+      p.failure_code,
+      p.processor_response,
+      p.created_at
+    FROM payments p
+    JOIN customers c ON c.id = p.customer_id
+    WHERE p.status = 'failed'
+      AND p.created_at >= {since}
+    ORDER BY p.created_at DESC
