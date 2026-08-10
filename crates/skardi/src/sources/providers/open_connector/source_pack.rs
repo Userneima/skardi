@@ -34,6 +34,10 @@ pub enum FixedValue {
     /// ["public_channel", "private_channel"]`, whose action schema takes an
     /// array, not a comma-joined string.
     StrList(&'static [&'static str]),
+    /// An arbitrary JSON value (typically an object) — e.g. Notion's search
+    /// `filter: {"property": "object", "value": "page"}`, whose action
+    /// schema takes an object. Pre-parsed and leaked by the pack loader.
+    Json(&'static serde_json::Value),
 }
 
 impl FixedValue {
@@ -47,6 +51,7 @@ impl FixedValue {
             Self::StrList(items) => {
                 serde_json::Value::from(items.iter().map(|s| *s).collect::<Vec<_>>())
             }
+            Self::Json(value) => (*value).clone(),
         }
     }
 }
@@ -130,7 +135,9 @@ impl SourcePackRegistry {
         for pack in [
             super::packs::mock::pack()?,
             super::packs::github::pack()?,
+            super::packs::notion::pack()?,
             super::packs::slack::pack()?,
+            super::packs::feishu::pack()?,
         ] {
             packs.insert(pack.name, pack);
         }
@@ -140,6 +147,15 @@ impl SourcePackRegistry {
     /// Look up a pack by provider name.
     pub fn get(&self, name: &str) -> Option<&'static SourcePack> {
         self.packs.get(name).copied()
+    }
+
+    /// Every built-in pack, name-sorted so enumeration is deterministic —
+    /// the etl generator's recipe contract suite and its `recipes` coverage
+    /// listing both iterate this (the map itself is private and unordered).
+    pub fn packs(&self) -> impl Iterator<Item = &'static SourcePack> + '_ {
+        let mut packs: Vec<&'static SourcePack> = self.packs.values().copied().collect();
+        packs.sort_by_key(|pack| pack.name);
+        packs.into_iter()
     }
 
     /// Resolve `pack` + `table` to a table definition, with targeted errors
@@ -219,6 +235,25 @@ mod tests {
         assert_eq!(pack.version, 1);
         assert_eq!(pack.tables.len(), 1);
         assert_eq!(pack.tables[0].id, "mock.items");
+    }
+
+    #[test]
+    fn packs_iterates_every_builtin_in_name_order() {
+        // The enumeration surface the etl generator's contract suite and
+        // `recipes` listing depend on: complete and deterministic — the
+        // backing map is unordered, so the sort here is load-bearing.
+        let registry = SourcePackRegistry::builtins().expect("embedded assets parse");
+        let names: Vec<&str> = registry.packs().map(|p| p.name).collect();
+        // Sortedness, asserted independently of the roster so THIS pin
+        // survives future pack additions untouched…
+        assert!(
+            names.windows(2).all(|w| w[0] < w[1]),
+            "packs() must iterate name-sorted with no duplicates: {names:?}"
+        );
+        // …and completeness as an explicit roster, the one line a new pack
+        // must extend (a stale list here means the generator's coverage
+        // listing silently omits the newcomer).
+        assert_eq!(names, vec!["feishu", "github", "mock", "notion", "slack"]);
     }
 
     #[test]
