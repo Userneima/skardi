@@ -39,36 +39,49 @@ Clone Skardi, start a server over the sample data already included in the reposi
 
 Skardi has two binaries, and the split matters: `skardi-server` holds the query engine and the registered sources, and `skardi` is a thin HTTP client that sends every command to a running server. The CLI has no engine of its own, so a server comes first.
 
-### 1. Install both binaries
+Nothing below is compiled: the server runs as a container image and the CLI is a pre-built binary.
 
-From a terminal, clone Skardi and install the server and the CLI:
+### 1. Clone the repository
+
+`data/products.csv` and the context file that registers it are both in the repository, so there is nothing else to download:
 
 ```bash
 git clone https://github.com/SkardiLabs/skardi.git
 cd skardi
-cargo install --locked --path crates/server
-cargo install --locked --path crates/cli
 ```
-
-Pre-built releases, embeddings, and other installation options are in the [installation docs](https://skardilabs.github.io/skardi-docs/).
 
 ### 2. Start a server on the built-in sample
 
-`data/products.csv` and a context file that registers it are both cloned with the repository, so no separate download or setup is required:
+`-v "$PWD":/w:ro` gives the container read-only access to the repository you just cloned, and `-w /w` makes the paths in the command resolve against it:
 
 ```bash
-skardi-server --ctx docs/basic/ctx.yaml --port 8080
+docker run -d --name skardi -p 8080:8080 \
+  -v "$PWD":/w:ro -w /w \
+  ghcr.io/skardilabs/skardi/skardi-server:latest \
+  --ctx docs/basic/ctx.yaml --port 8080
 ```
 
 ### 3. Query it from the CLI
 
-In a second terminal:
+Download the CLI for your platform, then point it at the server you just started:
 
 ```bash
-skardi query -e "SELECT * FROM products LIMIT 5" --table
+curl -sL https://github.com/SkardiLabs/skardi/releases/latest/download/skardi-aarch64-apple-darwin.tar.gz | tar xz
+./skardi --server http://127.0.0.1:8080 query -e "SELECT * FROM products LIMIT 5" --table
 ```
 
+Pre-built CLI binaries cover macOS on Apple silicon (`skardi-aarch64-apple-darwin`), Linux x86_64 (`skardi-x86_64-unknown-linux-gnu`), and Linux arm64 (`skardi-aarch64-unknown-linux-gnu`); all are on the [latest release](https://github.com/SkardiLabs/skardi/releases/latest). If you download one through a browser on macOS, clear the quarantine flag before running it: `xattr -d com.apple.quarantine skardi`.
+
 You should see the first five rows from `data/products.csv`. `products` is the source name declared in `docs/basic/ctx.yaml` — the CLI can only reach tables the server has registered.
+
+**Prefer to build from source, or on a platform without a pre-built binary?** You need a Rust toolchain, and the server takes a few minutes to compile:
+
+```bash
+cargo install --locked --path crates/server
+cargo install --locked --path crates/cli
+```
+
+Embeddings and other installation options are in the [installation docs](https://skardilabs.github.io/skardi-docs/).
 
 ---
 
@@ -83,7 +96,7 @@ Use this path to inspect a CSV, Parquet file, database, or object store without 
 **Paste this into your coding agent:**
 
 ```text
-Help me query a local file or data source with Skardi. Inspect this workspace for candidate files and existing Skardi configuration. If the target is unclear, ask me which file or data source to use. Keep every source read-only, preserve credentials as environment variables, and do not change data or schemas. Create only the smallest configuration needed, start skardi-server on it, then run a schema check and one useful query through the CLI against that server, and report the files you created, the commands you ran, and the result.
+Help me query a local file or data source with Skardi. Inspect this workspace for candidate files and existing Skardi configuration. If the target is unclear, ask me which file or data source to use. Keep every source read-only, preserve credentials as environment variables, and do not change data or schemas. Create only the smallest configuration needed, start the Skardi server on it — use the `ghcr.io/skardilabs/skardi/skardi-server` container image if `skardi-server` is not already installed locally — then run a schema check and one useful query through the CLI against that server, and report the files you created, the commands you ran, and the result.
 ```
 
 Need more control? See the [CLI guide](docs/cli.md) and [data-source guides](docs/).
@@ -107,7 +120,7 @@ Use this path to expose one reviewed task as a parameterized REST endpoint, with
 **Paste this into your coding agent:**
 
 ```text
-Create the smallest safe Skardi HTTP backend for one application task in this workspace. Inspect the existing data and configuration first; if the task, source, or required response is unclear, ask me before generating files. Create a read-only context and semantics definition, then add a SELECT-only YAML pipeline for the task. Do not add a pipeline that takes arbitrary SQL as a parameter, write to data, or change schemas. Start skardi-server, verify the pipeline endpoint with one request, and report the configuration files, endpoint, request, and response.
+Create the smallest safe Skardi HTTP backend for one application task in this workspace. Inspect the existing data and configuration first; if the task, source, or required response is unclear, ask me before generating files. Create a read-only context and semantics definition, then add a SELECT-only YAML pipeline for the task. Do not add a pipeline that takes arbitrary SQL as a parameter, write to data, or change schemas. Start the Skardi server — use the `ghcr.io/skardilabs/skardi/skardi-server` container image if `skardi-server` is not already installed locally — verify the pipeline endpoint with one request, and report the configuration files, endpoint, request, and response.
 ```
 
 For a runnable reference, see [pipelines](docs/pipelines.md) and the [simple backend demo](demo/simple_backend/).
@@ -173,16 +186,22 @@ spec:
 ```
 
 ```bash
-cargo install --locked --path crates/server
-
-skardi-server --ctx ctx.yaml --semantics semantics.yaml --pipeline pipelines/ --port 8080
+docker run -d --name skardi -p 8080:8080 \
+  -v "$PWD":/w:ro -w /w \
+  -e PG_USER -e PG_PASSWORD \
+  ghcr.io/skardilabs/skardi/skardi-server:latest \
+  --ctx ctx.yaml --semantics semantics.yaml --pipeline pipelines/ --port 8080
 
 curl -X POST http://localhost:8080/order-status/execute \
   -H 'Content-Type: application/json' \
   -d '{"from":"2026-07-01","to":"2026-08-01"}'
 ```
 
-The named pipeline is the interface you hand to a shared caller: the SQL is reviewed up front and only its parameters are open. The server also exposes an ad-hoc `POST /query` for exploration, but it is bounded by the same context — it reaches only registered sources, always rejects DDL and `COPY`, and allows writes only against a source you configured as `access_mode: read_write`. A source is read-only unless you set that explicitly; pipeline DDL is rejected while configuration loads. See [context boundaries for agents](docs/agent_data_plane.md) for the precise current behavior.
+`-e PG_USER -e PG_PASSWORD` forwards the two variables named in `ctx.yaml` without putting their values on the command line. One thing to watch: a database running on your own machine is not `localhost` from inside the container. Put the server on the same Docker network as the database, or run it natively instead (`cargo install --locked --path crates/server`, then `skardi-server` with the same flags).
+
+The named pipeline is the interface you hand to a shared caller: the SQL is reviewed up front and only its parameters are open. The server also exposes an ad-hoc `POST /query` for exploration, but it is bounded by the same context — it reaches only registered sources, always rejects DDL and `COPY`, and allows writes only against a source you configured as `access_mode: read_write`. A source is read-only unless you set that explicitly; pipeline DDL is rejected while configuration loads.
+
+An agent calling `/query` over HTTP can attach an `ai_context` object — a `purpose` and a `session_id` that groups one session's queries — which is recorded and never executed. (The CLI has no flag for it yet, so this is an HTTP-caller feature today.) On your side, query text and literal values stay out of the log and OTLP stream by default, so a secret or a customer name inlined into SQL is not exported to your collectors, and `--query-audit-db <path>` turns on a durable SQLite record of what ran. See [context boundaries for agents](docs/agent_data_plane.md) and the [server reference](docs/server.md) for the precise current behavior.
 
 ---
 
@@ -212,6 +231,7 @@ Skardi can query and join data across:
 
 - **Databases:** PostgreSQL, MySQL, SQLite, MongoDB, Redis, DynamoDB, SeekDB, and InfluxDB 3.
 - **Files and lakehouses:** CSV, JSON / NDJSON, Parquet, Lance, Apache Iceberg, and files in S3, GCS, or Azure Blob Storage.
+- **SaaS workspaces:** GitHub, Slack, Notion, and Feishu, reached through a self-hosted [Open Connector](https://github.com/oomol-lab/open-connector) gateway that holds the provider credentials — the tokens never enter Skardi, and the selected resources become ordinary SQL tables that join against everything else. See the [Open Connector guide](docs/open-connector.md).
 - **Document and retrieval workflows:** document parsing, full-text search, vector search, hybrid search, and embeddings.
 
 See the [data-source guides](docs/) for runnable configuration examples. Skardi's engine is built on [Apache DataFusion](https://datafusion.apache.org/) and supports federated SQL when a task needs to join registered sources.
