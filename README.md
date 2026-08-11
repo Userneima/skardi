@@ -15,7 +15,7 @@
   <a href="https://discord.gg/S5YQQPEV2m" title="Join the Skardi Discord community"><img src="asset/readme-discord-button.svg" alt="Join the Skardi Discord community" width="115" height="48" align="absmiddle"></a>
 </p>
 
-# Give coding agents context they can trust.
+# Give coding agents context they can trust and self-improving.
 
 **Skardi turns the data you approve into governed context for coding agents.** Define which sources an agent may use, explain the business meaning of every table and field, and expose only the read-only queries or pipelines it needs—so agents can work from context they can trust without broad database access.
 

@@ -15,7 +15,7 @@
   <a href="https://discord.gg/S5YQQPEV2m" title="加入 Skardi Discord 社区"><img src="asset/readme-discord-button.svg" alt="加入 Skardi Discord 社区" width="115" height="48" align="absmiddle"></a>
 </p>
 
-# 让编程 Agent 获得可信的上下文。
+# 让编程 Agent 获得可信且可自我改进的上下文。
 
 **Skardi 将你批准使用的数据转化为供编程 Agent 使用的受治理上下文。** 定义 Agent 可以使用哪些数据源，解释每张表和字段的业务含义，并只暴露它完成任务所需的只读查询或 pipeline——让 Agent 无需获得宽泛的数据库权限，也能基于可信上下文完成工作。
 
